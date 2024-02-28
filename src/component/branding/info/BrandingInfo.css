@@ -1,0 +1,70 @@
+.BrandingInfo {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 2px;
+  width: 260px;
+  text-align: left;
+}
+
+.BrandingInfo h1 {
+  margin: 0;
+  font-size: 1em;
+  color: #367532;
+}
+
+.BrandingLink {
+  color: #367532;
+  text-decoration: none;
+  opacity: 1;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.BrandingLink:visited {
+  color: #367532;
+}
+
+.BrandingLink:hover {
+  color: #367532;
+  text-decoration: underline;
+  opacity: 0.5;
+}
+
+.BrandingInfoVersion {
+  color: #8f8f8f;
+  font-size: 0.8em;
+}
+
+.BrandingInfo p {
+  color: #8f8f8f;
+  font-size: 0.8em;
+  margin-top: 2px;
+}
+
+.ConfigureInfo {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 10px;
+  margin-right: 10px;
+  width: 40px;
+  text-align: right;
+}
+
+.ConfigureClick {
+  color: #8c8c8c;
+  text-decoration: none;
+  opacity: 1;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.ConfigureClick:visited {
+  color: #8c8c8c;
+  text-decoration: none;
+}
+
+.ConfigureClick:hover {
+  color: #367532;
+  opacity: 0.5;
+  text-decoration: none;
+}

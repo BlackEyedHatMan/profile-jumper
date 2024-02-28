@@ -1,0 +1,18 @@
+.BrandingLogo {
+  display: inline-block;
+  width: 60px;
+  padding: 2px;
+}
+
+.BrandingLogo img {
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  opacity: 1;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.BrandingLogo:hover img {
+  opacity: 0.5;
+}

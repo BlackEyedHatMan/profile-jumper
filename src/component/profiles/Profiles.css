@@ -1,0 +1,21 @@
+.Profiles {
+  display: block;
+  margin-bottom: 5px;
+  min-height: 130px;
+}
+
+.NoProfiles {
+    height: 130px;
+}
+
+.NoProfiles h1 {
+  color: #367532;
+  margin: 5px;
+  font-size: 18px;
+}
+
+.NoProfiles p {
+  color: #000;
+  font-size: 12px;
+  margin: 5px;
+}

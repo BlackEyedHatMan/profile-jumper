@@ -1,0 +1,9 @@
+.SettingFooter {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #c4c4c4;
+  margin-top: 2px;
+  padding: 10px 0;
+  background-color: #fff;
+}

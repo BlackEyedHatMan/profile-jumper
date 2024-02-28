@@ -1,0 +1,9 @@
+.placeholder {
+  background: #fffbb8;
+  border: 1px dashed #e3e3e3;
+  font-size: 12px;
+  font-weight: normal;
+  padding-top: 10px;
+  color: #828282;
+  height: 24px;
+}

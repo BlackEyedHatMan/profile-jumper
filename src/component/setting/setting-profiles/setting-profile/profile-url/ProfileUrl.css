@@ -1,0 +1,11 @@
+.ProfileUrl {
+  display: inline-block;
+  padding: 5px;
+}
+
+.ProfileUrl input {
+  width: 300px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}

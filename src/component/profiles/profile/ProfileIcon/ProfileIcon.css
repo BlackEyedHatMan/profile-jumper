@@ -1,0 +1,35 @@
+.ProfileIcon {
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  vertical-align: bottom;
+  opacity: 1;
+  backface-visibility: hidden;
+}
+
+.ProfileIcon:hover {
+  padding-top: 0px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #d93a36;
+  opacity: 0.5;
+}
+
+.ProfileIcon::after {
+  content : "";
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  bottom: 0;
+  height: 0px;
+  width: 100%;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}

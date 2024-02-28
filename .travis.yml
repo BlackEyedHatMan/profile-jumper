@@ -1,0 +1,13 @@
+sudo: required
+dist: bionic
+
+cache:
+  directories:
+    - node_modules
+
+language: node_js
+node_js:
+  - '10'
+
+script:
+  - npm run build

@@ -1,0 +1,15 @@
+.Profile {
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+}
+
+.Profile a:link,
+.Profile a:visited {
+  color: #325d97;
+  outline: 0;
+  text-decoration: none;
+}

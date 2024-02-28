@@ -1,0 +1,33 @@
+.Settings {
+  text-align: center;
+  background-color: white;
+  margin: 0 0 100px 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.SettingsConfig {
+  display: block;
+}
+
+.SettingsPannel {
+  width: auto;
+  display: inline-block;
+}
+
+.ProfilesPannelWapper {
+  margin: 0 20px 0 0;
+  padding: 0;
+  width: 384px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.ProfilesPannel {
+  border: 1px solid #c4c4c4;
+  min-height: 180px;
+}
+
+.SettingsDataPanel {
+  margin-top: 10px;
+}

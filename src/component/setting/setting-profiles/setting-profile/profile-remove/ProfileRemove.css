@@ -1,0 +1,25 @@
+.ProfileRemove {
+  display: inline-block;
+  padding: 5px 2px;
+}
+
+.ProfileRemove input {
+  background-color: #c23d23;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+  width: 40px;
+  opacity: 1;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.ProfileRemove:hover input {
+  opacity: 0.5;
+}
