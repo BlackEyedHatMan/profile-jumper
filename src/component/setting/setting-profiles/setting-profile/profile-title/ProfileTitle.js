@@ -63,7 +63,7 @@ class ProfileTitle extends Component {
 
     return (
       <div className="ProfileTitle">
-        <input type="text" name="profileTitle" value={profileTitleInput.value} onChange={this.onChangedHandler} ="Title e.g. Instagram" {...( this.props.updateExisting && {onBlur: this.props.updateExisting} )} autoComplete="off" />
+        <input type="text" name="profileTitle" value={profileTitleInput.value} onChange={this.onChangedHandler} {...( this.props.updateExisting && {onBlur: this.props.updateExisting} )} autoComplete="off" />
       </div>
     );
   }

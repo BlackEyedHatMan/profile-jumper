@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getIcon, largeIconSize } from '../../../../utility/profile/profileIcon';
+import { findProfileIcon, largeIconSize } from '../../../../utility/profile/profile-icon';
 
 import './ProfileIcon.css';
 
 const profileIcon = (props) => (
-  <FontAwesomeIcon icon={getIcon(props.icon)} size={largeIconSize} className="ProfileIcon" />
+  <FontAwesomeIcon icon={findProfileIcon(props.icon)} size={largeIconSize} className="ProfileIcon" />
 );
 
 export default profileIcon;

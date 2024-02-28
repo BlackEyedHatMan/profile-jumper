@@ -26,8 +26,8 @@ class SettingProfiles extends Component {
   dragEnd = (e) => {
     this.draggedSettingProfile.style.display = 'block'
 
-    const placeholderEsists = this.draggedSettingProfile.parentNode.contains(placeholder)
-    placeholderEsists && this.draggedSettingProfile.parentNode.removeChild(placeholder)
+    const placeholderExists = this.draggedSettingProfile.parentNode.contains(placeholder)
+    placeholderExists && this.draggedSettingProfile.parentNode.removeChild(placeholder)
 
     if(this.draggedOverSettingProfile === undefined || this.draggedOverSettingProfile === null) return
     this.props.onProfileReorder(this.draggedSettingProfile.id, this.draggedOverSettingProfile.id)

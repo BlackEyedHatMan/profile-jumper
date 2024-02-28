@@ -7,7 +7,9 @@ cache:
 
 language: node_js
 node_js:
-  - '10'
+  - '15'
 
 script:
+  - npm install
+  - npm run test
   - npm run build

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as SolidIcon from '@fortawesome/free-solid-svg-icons'
 
 import * as profileActions from '../../store/profile/action'
-import { sortProfilesById } from '../../utility/profile/profileUtility'
+import { sortProfilesById } from '../../utility/profile/profile-icon-utility'
 
 import Profile from './profile/Profile'
 

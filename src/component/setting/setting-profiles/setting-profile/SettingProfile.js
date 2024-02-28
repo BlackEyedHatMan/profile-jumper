@@ -6,7 +6,7 @@ import ProfileTitle from './profile-title/ProfileTitle'
 import ProfileIcon from './profile-icon/ProfileIcon'
 import ProfileAdd from './profile-add/ProfileAdd'
 import ProfileRemove from './profile-remove/ProfileRemove'
-import * as profileUtility from '../../../../utility/profile/profileUtility'
+import * as profileIconUtility from '../../../../utility/profile/profile-icon-utility'
 
 import './SettingProfile.css'
 
@@ -70,20 +70,16 @@ class SettingProfile extends Component {
     if(inputRef === 'profileUrl') {
         const profileUrl = this.state.inputs['profileUrl']
 
-        //todo: refactor all of this
         if(profileUrl.isValid) {
-          const title = profileUtility.profileTitleFromUrl(profileUrl.value)
+          const profileIconKey = profileIconUtility.profileIconFromUrl(profileUrl.value)
 
-          if(title) {
-            const iconKey = profileUtility.profileKeyFromValue(title)
-
-            //todo: refactor use updateObject
+          if(profileIconKey) {
             const profileIcon = inputs['profileIcon']
-            profileIcon.value = iconKey
+            profileIcon.value = profileIconKey
             inputs['profileIcon'] = profileIcon
 
             const profileTitle = inputs['profileTitle']
-            profileTitle.value = title
+            profileTitle.value = profileIconKey
             inputs['profileTitle'] = profileTitle
           }
         } else {
@@ -101,7 +97,7 @@ class SettingProfile extends Component {
       const profileTitle = this.state.inputs['profileTitle']
 
       if(profileTitle.isValid) {
-        const iconKey = profileUtility.profileKeyFromValue(profileTitle.value)
+        const iconKey = profileIconUtility.findProfileIconKeyForTitle(profileTitle.value)
 
         const profileIcon = inputs['profileIcon']
         profileIcon.value = iconKey

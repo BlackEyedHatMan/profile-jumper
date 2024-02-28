@@ -1,22 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-import ProfileIcon from './ProfileIcon/ProfileIcon';
+import './Profile.css'
 
-import './Profile.css';
+import ProfileIcon from './ProfileIcon/ProfileIcon'
 
-const profile = (props) => {
+const profile = ({icon, url}) => {
 
-  const profileTitle = iconName => iconName.substr(0, 1).toUpperCase() + iconName.substr(1).toLowerCase();
+  const profileTitle = iconName => iconName.substr(0, 1).toUpperCase() + iconName.substr(1).toLowerCase()
 
-  const linkTitle = profileTitle(props.icon);
+  const linkTitle = profileTitle(icon);
 
   return (
     <div className="Profile">
-      <a href={props.url} title={linkTitle} target="_blank" rel="noopener noreferrer">
-          <ProfileIcon icon={props.icon}/>
+      <a href={url} title={linkTitle} target="_blank" rel="noopener noreferrer">
+          <ProfileIcon icon={icon}/>
       </a>
     </div>
-  );
+  )
 
 }
 

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
 
 import * as profileActions from '../../../store/profile/action'
-import * as profileUtility from '../../../utility/profile/profileUtility'
+import * as profileIconUtility from '../../../utility/profile/profile-icon-utility'
 import { generateUniqueId } from '../../../utility/identifier/identifierUtility'
 
 import './SettingsDataImport.css'
@@ -38,7 +38,7 @@ class SettingsDataImport extends Component {
 
   mapDataToProfile = (data) => {
     const profileId = generateUniqueId()
-    const profileIcon = profileUtility.profileKeyFromValue(data.title)
+    const profileIcon = profileIconUtility.findProfileIconKeyForTitle(data.title)
     return {id: profileId, url: data.url, title: data.title, icon:profileIcon}
   }
 

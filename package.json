@@ -1,6 +1,6 @@
 {
   "name": "profile-jumper",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": true,
   "homepage": "https://profile-jumper.github.io",
   "dependencies": {
@@ -40,5 +40,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
   }
 }
