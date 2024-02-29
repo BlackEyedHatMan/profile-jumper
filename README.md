@@ -4,11 +4,6 @@
 # profile-jumper
 Profile Jumper! Jump easily between profiles!
 
-## Notes:
-1. Need to use Docker for deps (no on machine)
-2. Be pragmatic with local merge/squash (speed)
-3. Something new
-
 ## Development
 Project uses React, read on about the design decisions and how to build.
 
