@@ -1,0 +1,13 @@
+# latest node breaks! (deps are really old)
+#FROM node:20.11.1-alpine3.19
+
+FROM node:16-alpine
+
+WORKDIR /app
+
+COPY package*.json /app
+
+RUN npm install
+
+COPY . /app
+
