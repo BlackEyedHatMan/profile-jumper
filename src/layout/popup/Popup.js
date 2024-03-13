@@ -1,20 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Profiles from '../../component/profiles/Profiles'
 import Branding from '../../component/branding/Branding'
 
 import './Popup.css'
 
-class Popup extends Component {
+export const Popup = () => {
 
-  render() {
     return (
-      <div className="Popup">
-        <Profiles/>
-        <Branding/>
-      </div>
+        <div className="Popup">
+            <Profiles/>
+            <Branding/>
+        </div>
     )
-  }
 }
-
-export default Popup

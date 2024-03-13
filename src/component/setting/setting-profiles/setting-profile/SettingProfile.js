@@ -1,164 +1,87 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
-import ProfileHandle from './profile-handle/ProfileHandle'
-import ProfileUrl from './profile-url/ProfileUrl'
-import ProfileTitle from './profile-title/ProfileTitle'
-import ProfileIcon from './profile-icon/ProfileIcon'
-import ProfileAdd from './profile-add/ProfileAdd'
-import ProfileRemove from './profile-remove/ProfileRemove'
+import { PROFILE_URL, ProfileUrl } from './profile-url/ProfileUrl'
+import { PROFILE_TITLE, ProfileTitle } from './profile-title/ProfileTitle'
+import { ProfileIcon } from './profile-icon/ProfileIcon'
 import * as profileIconUtility from '../../../../utility/profile/profile-icon-utility'
+import { ProfileAdd } from './profile-add/ProfileAdd'
+import { ProfileRemove } from './profile-remove/ProfileRemove'
+import { isEntityEmpty } from '../../../../utility/entity/entity-utility'
 
 import './SettingProfile.css'
 
-class SettingProfile extends Component {
+export const SettingProfile = ({ onProfileCreate, onProfileRemove }) => {
+    const [profileIconName, setProfileIconName] = useState('')
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      id: props.id || 0,
-      valid: false,
-      inputs: {
-        profileUrl: {
-          value: props.url || '',
-          isValid: false
-        },
-        profileTitle: {
-          value: props.title || '',
-          isValid: false
-        },
-        profileIcon: {
-          value: props.icon || ''
-        }
-      }
-    }
-  }
-
-  //refactor this
-  resetState = () => {
-    this.setState((state) => {
-      return {
-        id: 0,
-        valid: false,
-        inputs: {
-          profileUrl: {
-            value: '',
-            isValid: false
-          },
-          profileTitle: {
-            value: '',
-            isValid: false
-          },
-          profileIcon: {
-            value: ''
-          }
-        }
-      }
+    // todo: inject profile or fetch from storage (think about SRP)
+    const { register, watch, formState: {errors}, handleSubmit } = useForm({
+        mode: 'onChange'
     })
-  }
 
-  //todo: refactor this!
-  updateInput = (inputRef, value, valid) => {
-    let inputs = {...this.state.inputs}
+    useEffect(() => {
+        const subscription = watch((formValue, {name}) => {
+            const inputValue = (formValue && formValue[name]) ? formValue[name] : ''
+            if (name === PROFILE_URL) {
+                const profileIconUrlHint = profileIconUtility.profileIconFromUrl(inputValue)
+                setProfileIconName(profileIconUrlHint)
+                // todo: should override title (perhaps have waterfall, delegated logic)
+            }
+            if (name === PROFILE_TITLE) {
+                // todo: look into profileIconUtility.findProfileIconKeyForTitle()
+                setProfileIconName(inputValue)
+            }
+        })
+        return () => subscription.unsubscribe()
+    }, [watch])
 
-    const effectedInput = inputs[inputRef]
-    effectedInput.value = value
-    effectedInput.isValid = valid
 
-    inputs[inputRef] = effectedInput
+    // will be valid 1st time round (onProfileAddHandler -> handleSubmit will re-validate)
+    const isValid = isEntityEmpty(errors)
 
-    if(inputRef === 'profileUrl') {
-        const profileUrl = this.state.inputs['profileUrl']
-
-        if(profileUrl.isValid) {
-          const profileIconKey = profileIconUtility.profileIconFromUrl(profileUrl.value)
-
-          if(profileIconKey) {
-            const profileIcon = inputs['profileIcon']
-            profileIcon.value = profileIconKey
-            inputs['profileIcon'] = profileIcon
-
-            const profileTitle = inputs['profileTitle']
-            profileTitle.value = profileIconKey
-            inputs['profileTitle'] = profileTitle
-          }
-        } else {
-          const profileIcon = inputs['profileIcon']
-          profileIcon.value = ''
-          inputs['profileIcon'] = profileIcon
-
-          const profileTitle = inputs['profileTitle']
-          profileTitle.value = ''
-          inputs['profileTitle'] = profileTitle
-        }
+    const onProfileAddHandler = (event) => {
+        handleSubmit(onSubmit)(event)
     }
 
-    if(inputRef === 'profileTitle') {
-      const profileTitle = this.state.inputs['profileTitle']
-
-      if(profileTitle.isValid) {
-        const iconKey = profileIconUtility.findProfileIconKeyForTitle(profileTitle.value)
-
-        const profileIcon = inputs['profileIcon']
-        profileIcon.value = iconKey
-        inputs['profileIcon'] = profileIcon
-      }
+    const onSubmit = async (data) => {
+        let profile = mapValuesToProfile(data)
+        // todo: async -> resetState
+        onProfileCreate?.(profile)
+        // todo: might need to reuse submission mechanics -> delegate to "handler" e.g. onProfileUpdate
     }
 
-    const areAllValid = this.isAllInputValid()
-
-    this.setState({...this.state, inputs: inputs, valid: areAllValid})
-  }
-
-  isAllInputValid = () => {
-    const inputs = this.state.inputs
-    return inputs['profileUrl'].isValid || inputs['profileTitle'].isValid
-  }
-
-  profileAddHandler = () => {
-    const profile = this.mapValuesProfile()
-    this.props.addHandler(profile)
-    this.resetState()
-  }
-
-  profileUpdateHandler = () => {
-    const valid = this.state.valid
-    if(valid) {
-      const profile = this.mapValuesProfile()
-      this.props.updateHandler(profile)
+    // todo: should be domain (values->entity & entity->values)
+    const mapValuesToProfile = (data) => {
+        // todo: icon should be actual icon (de-coupling from icon lib?!)
+        // todo: id -> undefined :(
+        return {id: data.id, url: data.profileUrl, title: data.profileTitle, icon: profileIconName}
     }
-  }
 
-  mapValuesProfile = () => {
-    const id = this.state.id
-    const { profileUrl, profileTitle, profileIcon } = this.state.inputs
-    return {id: id, url: profileUrl.value, title: profileTitle.value, icon: profileIcon.value}
-  }
+    // todo: needed?! (sub react ref/id)
+    // const idProperties = (this.props.primaryInput) ? {} : {id: this.props.id}
 
-  render() {
-    const valid = this.state.valid
-    const { profileUrl, profileTitle, profileIcon } = this.state.inputs
-
-    const idProperties = (this.props.primaryInput) ? {} : {id: this.props.id}
-
-    let className = 'SettingProfile'
-    if (this.props.primaryInput) className += ' PrimaryInput'
-
-    const draggableOptions = (this.props.noDragHandle) ? {} : {draggable: true, onDragStart: this.props.dragStart, onDragEnd: this.props.dragEnd}
-    const profileAddButton = (this.props.addHandler) ? <ProfileAdd handleAdd={this.profileAddHandler} enabled={valid}/> : null
-    const profileRemoveButton = (this.props.removeHandler) ? <ProfileRemove handleRemove={this.props.removeHandler}/> : null
+    // todo: need improved naming
+    // let className = 'SettingProfile'
+    // if (this.props.primaryInput) className += ' PrimaryInput'
+    //
+    // const draggableOptions = (this.props.noDragHandle) ? {} : {draggable: true, onDragStart: this.props.dragStart, onDragEnd: this.props.dragEnd}
 
     return (
-          <div {...idProperties} className={className} {...draggableOptions}>
-            <ProfileHandle showHandle={!this.props.noDragHandle}/>
-            <ProfileUrl updateValue={(value, validity) => this.updateInput('profileUrl', value, validity)} value={profileUrl.value} { ...(this.props.updateHandler && {updateExisting: this.profileUpdateHandler}) } />
-            <ProfileTitle updateValue={(value, validity) => this.updateInput('profileTitle', value, validity)} value={profileTitle.value} { ...(this.props.updateHandler && {updateExisting: this.profileUpdateHandler}) }/>
-            <ProfileIcon icon={profileIcon.value}/>
-            {profileAddButton}
-            {profileRemoveButton}
-          </div>
-    )
-  }
-}
+        /*
+        <div {...idProperties} className={className} {...draggableOptions}>
+        */
 
-export default SettingProfile
+        <div>
+            {/*
+            <ProfileHandle showHandle={!this.props.noDragHandle}/>
+            */}
+
+            <ProfileUrl register={register} errors={errors}/>
+            <ProfileTitle register={register} errors={errors}/>
+            <ProfileIcon icon={profileIconName}/>
+
+            {onProfileCreate && <ProfileAdd onCreate={onProfileAddHandler} enabled={isValid}/>}
+            {onProfileRemove && <ProfileRemove onRemove={onProfileRemove}/>}
+        </div>
+    )
+}

@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import * as profileActions from '../../../store/profile/action'
-import SettingProfile from './setting-profile/SettingProfile'
-import { insertBefore, insertAfter, obtainNearestParentForClassName } from '../../../utility/native-dom/nativeDomUtility'
+import { SettingProfile } from './setting-profile/SettingProfile'
+import { insertAfter, insertBefore, obtainNearestParentForClassName } from '../../../utility/native-dom/nativeDomUtility'
 
 import './SettingProfiles.css'
 
@@ -10,88 +10,92 @@ const placeholder = document.createElement('div')
 placeholder.className = 'placeholder'
 placeholder.innerHTML = 'Move here...'
 
-class SettingProfiles extends Component {
+const SettingProfiles = () => {
 
-  componentDidMount() {
-    // todo: legacy
-    //this.props.onInitProfiles()
-  }
+    // todo: init profiles from data store (legacy)
+    // componentDidMount() {
+    //   //this.props.onInitProfiles()
+    // }
 
-  dragStart = (e) => {
-    this.draggedSettingProfile = e.currentTarget
-    this.draggedSettingProfile.ordinal = this.props.profiles.filter(profile => profile.id === e.currentTarget.id)[0].ordinal
-    e.dataTransfer.effectAllowed = 'move'
-  }
+    // todo: need to investigate dragging
+    // const dragStart = (e) => {
+    //     this.draggedSettingProfile = e.currentTarget
+    //     this.draggedSettingProfile.ordinal = this.props.profiles.filter(profile => profile.id === e.currentTarget.id)[0].ordinal
+    //     e.dataTransfer.effectAllowed = 'move'
+    // }
+    //
+    // const dragEnd = (e) => {
+    //     this.draggedSettingProfile.style.display = 'block'
+    //
+    //     const placeholderExists = this.draggedSettingProfile.parentNode.contains(placeholder)
+    //     placeholderExists && this.draggedSettingProfile.parentNode.removeChild(placeholder)
+    //
+    //     if (this.draggedOverSettingProfile === undefined || this.draggedOverSettingProfile === null) return
+    //     this.props.onProfileReorder(this.draggedSettingProfile.id, this.draggedOverSettingProfile.id)
+    // }
+    //
+    // const dragOver = (e) => {
+    //     e.preventDefault()
+    //
+    //     if (!this.draggedSettingProfile) return
+    //     this.draggedSettingProfile.style.display = 'none'
+    //
+    //     if (e.target.className === 'placeholder') return
+    //
+    //     const draggedOverSettingProfile = obtainNearestParentForClassName(e.target, 'SettingProfile')
+    //     if (draggedOverSettingProfile === null || draggedOverSettingProfile.id === this.draggedSettingProfile.id) return
+    //
+    //     const draggedOverId = draggedOverSettingProfile.id
+    //     const draggedOverOrdinal = this.props.profiles.filter(profile => profile.id === draggedOverId)[0].ordinal
+    //     this.draggedOverSettingProfile = {id: draggedOverId, ordinal: draggedOverOrdinal}
+    //
+    //     if (this.draggedSettingProfile.ordinal < this.draggedOverSettingProfile.ordinal) {
+    //         insertAfter(draggedOverSettingProfile, placeholder)
+    //     } else {
+    //         insertBefore(draggedOverSettingProfile, placeholder)
+    //     }
+    // }
 
-  dragEnd = (e) => {
-    this.draggedSettingProfile.style.display = 'block'
+    const settingProfiles = [] //this.props.profiles
 
-    const placeholderExists = this.draggedSettingProfile.parentNode.contains(placeholder)
-    placeholderExists && this.draggedSettingProfile.parentNode.removeChild(placeholder)
+    return (
+        /*<div className="SettingsProfilesContainer" onDragOver={dragOver.bind(this)}>*/
 
-    if(this.draggedOverSettingProfile === undefined || this.draggedOverSettingProfile === null) return
-    this.props.onProfileReorder(this.draggedSettingProfile.id, this.draggedOverSettingProfile.id)
-  }
+        <div className="SettingsProfilesContainer">
+            {/*{settingProfiles.map(settingProfile => (*/}
+            {/*    <SettingProfile*/}
+            {/*        key={settingProfile.id}*/}
+            {/*        id={settingProfile.id}*/}
+            {/*        url={settingProfile.url}*/}
+            {/*        title={settingProfile.title}*/}
+            {/*        icon={settingProfile.icon}*/}
+            {/*        updateHandler={this.props.onProfileUpdate}*/}
+            {/*        removeHandler={() => this.props.onProfileRemove(settingProfile.id)}*/}
+            {/*        dragStart={dragStart}*/}
+            {/*        dragEnd={dragEnd}*/}
+            {/*    />*/}
+            {/*))}*/}
+            {/*<SettingProfile addHandler={this.props.onProfileAdd} primaryInput noDragHandle/>*/}
 
-  dragOver = (e) => {
-    e.preventDefault()
+            <SettingProfile/>
 
-    if(!this.draggedSettingProfile) return
-    this.draggedSettingProfile.style.display = 'none'
-
-    if(e.target.className === 'placeholder') return
-
-    const draggedOverSettingProfile = obtainNearestParentForClassName(e.target, 'SettingProfile')
-    if(draggedOverSettingProfile === null || draggedOverSettingProfile.id === this.draggedSettingProfile.id) return
-
-    const draggedOverId = draggedOverSettingProfile.id
-    const draggedOverOrdinal = this.props.profiles.filter(profile => profile.id === draggedOverId)[0].ordinal
-    this.draggedOverSettingProfile = {id: draggedOverId, ordinal: draggedOverOrdinal}
-
-    if(this.draggedSettingProfile.ordinal < this.draggedOverSettingProfile.ordinal) {
-      insertAfter(draggedOverSettingProfile, placeholder)
-    } else {
-      insertBefore(draggedOverSettingProfile, placeholder)
-    }
-  }
-
-  render() {
-      const settingProfiles = [] //this.props.profiles
-
-      return(
-          <div className="SettingsProfilesContainer" onDragOver={this.dragOver.bind(this)}>
-            {settingProfiles.map(settingProfile => (
-              <SettingProfile
-                key={settingProfile.id}
-                id={settingProfile.id}
-                url={settingProfile.url}
-                title={settingProfile.title}
-                icon={settingProfile.icon}
-                updateHandler={this.props.onProfileUpdate}
-                removeHandler={() => this.props.onProfileRemove(settingProfile.id)}
-                dragStart={this.dragStart}
-                dragEnd={this.dragEnd}
-              />
-            ))}
-            <SettingProfile addHandler={this.props.onProfileAdd} primaryInput noDragHandle />
-          </div>
-      )
-  }
+        </div>
+    )
 }
 
-
-const mapStateToProps = centralStoreState => {
-    return { profiles: centralStoreState.profileStore.profiles }
-}
-
-const mapDispatcherToProps = (dispatch) => {
-    return {
-      onInitProfiles: () => dispatch( profileActions.retrieveFromPersistentProfilesAction() ),
-      onProfileAdd: (profile) => dispatch( profileActions.createProfileAndPersistAction(profile) ),
-      onProfileUpdate: (profile) => dispatch( profileActions.updateProfileAndPersistAction(profile) ),
-      onProfileRemove: (id) => dispatch( profileActions.deleteProfileAndPersistAction(id) ),
-      onProfileReorder: (id, beforeId) => dispatch( profileActions.reOrderProfileAndPersistAction(id, beforeId) )
-    }
-}
+// todo: handle from state (implement better)
+// const mapStateToProps = centralStoreState => {
+//     return {profiles: centralStoreState.profileStore.profiles}
+// }
+//
+// const mapDispatcherToProps = (dispatch) => {
+//     return {
+//         onInitProfiles: () => dispatch(profileActions.retrieveFromPersistentProfilesAction()),
+//         onProfileAdd: (profile) => dispatch(profileActions.createProfileAndPersistAction(profile)),
+//         onProfileUpdate: (profile) => dispatch(profileActions.updateProfileAndPersistAction(profile)),
+//         onProfileRemove: (id) => dispatch(profileActions.deleteProfileAndPersistAction(id)),
+//         onProfileReorder: (id, beforeId) => dispatch(profileActions.reOrderProfileAndPersistAction(id, beforeId))
+//     }
+// }
 
 export default SettingProfiles

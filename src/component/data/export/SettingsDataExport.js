@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileDownload } from '@fortawesome/free-solid-svg-icons'
@@ -7,16 +7,16 @@ import * as profileActions from '../../../store/profile/action'
 
 import './SettingsDataExport.css'
 
-class SettingsDataExport extends Component {
+const SettingsDataExport = () => {
 
-  componentDidMount() {
-    //legacy
-    //this.props.onInitProfiles()
-  }
+  // todo: init profiles from data store (legacy)
+  // componentDidMount() {
+  //   //this.props.onInitProfiles()
+  // }
 
-  saveDataFileToClient = () => {
+  const saveDataFileToClient = () => {
     const settingProfileData = this.props.profiles
-    const cleanedSettingProfileData = this.cleanOutputFileData(settingProfileData)
+    const cleanedSettingProfileData = cleanOutputFileData(settingProfileData)
 
     const fileData = JSON.stringify(cleanedSettingProfileData)
     const blob = new Blob([fileData], {type: 'text/plain'})
@@ -28,20 +28,18 @@ class SettingsDataExport extends Component {
     link.click()
   }
 
-  cleanOutputFileData = (profiles) => {
+  const cleanOutputFileData = (profiles) => {
     return profiles.map(profile => { return {url: profile.url, title: profile.title }} )
   }
 
-  render() {
-    const profiles = this.props.profiles
-    const enableDisableExport = (!profiles || profiles.length > 0) ? {} : {disabled: "disabled"}
+  const profiles = this.props.profiles
+  const enableDisableExport = (!profiles || profiles.length > 0) ? {} : {disabled: "disabled"}
 
     return (
       <div className="SettingsDataExport">
-        <button onClick={this.saveDataFileToClient} {...enableDisableExport} title="Click here to export profile settings to a file"><FontAwesomeIcon icon={faFileDownload}/></button>
+        <button onClick={saveDataFileToClient} {...enableDisableExport} title="Click here to export profile settings to a file"><FontAwesomeIcon icon={faFileDownload}/></button>
       </div>
     )
-  }
 }
 
 

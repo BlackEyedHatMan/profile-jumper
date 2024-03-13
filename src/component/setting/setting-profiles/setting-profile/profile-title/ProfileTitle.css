@@ -1,11 +1,24 @@
 .ProfileTitle {
-  display: inline-block;
-  padding: 5px;
+    display: inline-block;
+    padding: 5px;
 }
 
 .ProfileTitle input {
-  width: 200px;
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+    width: 200px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.ProfileTitle input.error {
+    border: 2px solid red;
+    outline-color: red;
+}
+
+.ProfileTitle p.error {
+    padding: 2px 4px;
+    margin: 0;
+    color: #d30000;
+    font-size: 0.6em;
+    text-align: left;
 }

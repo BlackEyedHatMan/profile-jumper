@@ -5,10 +5,8 @@ import { findProfileIcon, smallIconSize } from '../../../../../utility/profile/p
 
 import './ProfileIcon.css'
 
-const profileIcon = (props) => (
+export const ProfileIcon = ({ icon }) => (
   <div className="SettingProfileIconWrapper">
-    <FontAwesomeIcon icon={findProfileIcon(props.icon)} size={smallIconSize} className="SettingProfileIcon" />
+    <FontAwesomeIcon icon={findProfileIcon(icon)} size={smallIconSize} className="SettingProfileIcon" />
   </div>
 )
-
-export default profileIcon
