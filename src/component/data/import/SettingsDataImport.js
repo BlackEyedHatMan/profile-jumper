@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
@@ -65,4 +64,4 @@ const mapDispatcherToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatcherToProps)(SettingsDataImport)
+export default SettingsDataImport

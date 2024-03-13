@@ -9,7 +9,7 @@ services:
       dockerfile: Dockerfile.dev
     container_name: browser-ext
     ports:
-      - 3000:3000
+      - "3000:3000"
     volumes:
       - ./src:/app/src
     command: npm run start

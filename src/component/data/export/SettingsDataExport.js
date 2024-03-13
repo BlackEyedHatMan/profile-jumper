@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileDownload } from '@fortawesome/free-solid-svg-icons'
@@ -11,7 +10,8 @@ import './SettingsDataExport.css'
 class SettingsDataExport extends Component {
 
   componentDidMount() {
-    this.props.onInitProfiles()
+    //legacy
+    //this.props.onInitProfiles()
   }
 
   saveDataFileToClient = () => {
@@ -55,4 +55,4 @@ const mapDispatcherToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatcherToProps)(SettingsDataExport)
+export default SettingsDataExport

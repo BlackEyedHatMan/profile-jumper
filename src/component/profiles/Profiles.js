@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as SolidIcon from '@fortawesome/free-solid-svg-icons'
 
@@ -13,7 +12,8 @@ import './Profiles.css'
 class Profiles extends Component {
 
   componentDidMount() {
-    this.props.onInitProfiles()
+    // legacy
+    //this.props.onInitProfiles()
   }
 
   render() {
@@ -56,4 +56,4 @@ const mapDispatcherToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatcherToProps)(Profiles)
+export default Profiles

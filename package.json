@@ -3,24 +3,6 @@
   "version": "0.0.8",
   "private": true,
   "homepage": "https://profile-jumper.github.io",
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.28",
-    "@fortawesome/free-brands-svg-icons": "^5.13.0",
-    "@fortawesome/free-regular-svg-icons": "^5.13.0",
-    "@fortawesome/free-solid-svg-icons": "^5.13.0",
-    "@fortawesome/react-fontawesome": "^0.1.10",
-    "archiver": "^4.0.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-redux": "^7.2.0",
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.1",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
-    "replace-in-file": "^6.0.0",
-    "uuid": "^8.1.0"
-  },
   "scripts": {
     "start": "REACT_APP_VERSION=$npm_package_version react-scripts start",
     "prebuild": "node ./scripts/version_replace.js $npm_package_version",
@@ -40,6 +22,21 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-brands-svg-icons": "^5.13.0",
+    "@fortawesome/free-regular-svg-icons": "^5.13.0",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.1.10",
+    "archiver": "^4.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.22.3",
+    "react-router-dom": "^6.22.3",
+    "react-scripts": "^5.0.1",
+    "replace-in-file": "^6.0.0",
+    "uuid": "^8.1.0"
   },
   "devDependencies": {
     "jest": "^24.9.0"

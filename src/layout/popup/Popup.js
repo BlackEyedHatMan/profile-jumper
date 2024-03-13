@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import Profiles from '../../component/profiles/Profiles';
-import Branding from '../../component/branding/Branding';
+import Profiles from '../../component/profiles/Profiles'
+import Branding from '../../component/branding/Branding'
 
-import './Popup.css';
+import './Popup.css'
 
 class Popup extends Component {
 
@@ -13,8 +13,8 @@ class Popup extends Component {
         <Profiles/>
         <Branding/>
       </div>
-    );
+    )
   }
 }
 
-export default Popup;
+export default Popup

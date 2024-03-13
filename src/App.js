@@ -1,21 +1,10 @@
 import React from 'react'
-import { Route, Redirect, Switch } from 'react-router-dom'
+import { RouterProvider } from 'react-router-dom'
 
-import Popup from './layout/popup/Popup'
-import Settings from './layout/settings/Settings'
+import { appRoutes } from './route/appRoutes'
 
-function App() {
-  return (
-    <React.Fragment>
-        <Switch>
-            <Route exact path="/">
-                <Redirect to="/popup"/>
-            </Route>
-            <Route path="/popup" component={Popup}/>
-            <Route path="/settings" component={Settings}/>
-        </Switch>
-    </React.Fragment>
-  )
-}
+const App = () => (
+    <RouterProvider router={appRoutes} />
+)
 
 export default App

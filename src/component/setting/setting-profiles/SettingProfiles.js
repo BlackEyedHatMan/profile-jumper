@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
 import * as profileActions from '../../../store/profile/action'
 import SettingProfile from './setting-profile/SettingProfile'
@@ -14,7 +13,8 @@ placeholder.innerHTML = 'Move here...'
 class SettingProfiles extends Component {
 
   componentDidMount() {
-    this.props.onInitProfiles()
+    // todo: legacy
+    //this.props.onInitProfiles()
   }
 
   dragStart = (e) => {
@@ -56,7 +56,7 @@ class SettingProfiles extends Component {
   }
 
   render() {
-      const settingProfiles = this.props.profiles
+      const settingProfiles = [] //this.props.profiles
 
       return(
           <div className="SettingsProfilesContainer" onDragOver={this.dragOver.bind(this)}>
@@ -94,4 +94,4 @@ const mapDispatcherToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatcherToProps)(SettingProfiles)
+export default SettingProfiles
