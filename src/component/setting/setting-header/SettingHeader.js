@@ -1,18 +1,17 @@
-import React from 'react';
+import React from 'react'
 
-import SettingLogo from './logo/SettingLogo';
+import { SettingLogo } from './logo/SettingLogo'
 
-import './SettingHeader.css';
+import './SettingHeader.css'
 
-const settingHeader = (props) => (
-  <div className="SettingHeader">
-    <SettingLogo/>
+export const SettingHeader = () => (
+    <div className="SettingHeader">
 
-    <div className="SettingInfo">
-      <h1>Profile Jumper!</h1>
-      <p><b>Settings</b>: Enter you profile URL, Title (icon will automatically change). Then click on the "+" button.</p>
+        <SettingLogo/>
+
+        <div className="SettingInfo">
+            <h1>Profile Jumper!</h1>
+            <p><b>Settings</b>: Enter you profile URL, Title (icon will automatically change). Then click on the "+" button.</p>
+        </div>
     </div>
-  </div>
-);
-
-export default settingHeader;
+)

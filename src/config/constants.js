@@ -1,1 +1,1 @@
-export const app_version = process.env.REACT_APP_VERSION
+export const APP_VERSION = process.env.REACT_APP_VERSION

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
-import SettingHeader from '../../component/setting/setting-header/SettingHeader'
+import { SettingHeader } from '../../component/setting/setting-header/SettingHeader'
 import SettingProfiles from '../../component/setting/setting-profiles/SettingProfiles'
-import SettingFooter from '../../component/setting/setting-footer/SettingFooter'
+import { SettingFooter } from '../../component/setting/setting-footer/SettingFooter'
 
 import Profiles from '../../component/profiles/Profiles'
 
