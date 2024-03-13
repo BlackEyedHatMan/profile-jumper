@@ -15,12 +15,12 @@ export const SettingProfile = ({ onProfileCreate, onProfileRemove }) => {
     const [profileIconName, setProfileIconName] = useState('')
 
     // todo: inject profile or fetch from storage (think about SRP)
-    const { register, watch, formState: {errors}, handleSubmit } = useForm({
+    const { register, watch, formState: { errors }, handleSubmit } = useForm({
         mode: 'onChange'
     })
 
     useEffect(() => {
-        const subscription = watch((formValue, {name}) => {
+        const subscription = watch((formValue, { name }) => {
             const inputValue = (formValue && formValue[name]) ? formValue[name] : ''
             if (name === PROFILE_URL) {
                 const profileIconUrlHint = profileIconUtility.profileIconFromUrl(inputValue)
@@ -54,7 +54,7 @@ export const SettingProfile = ({ onProfileCreate, onProfileRemove }) => {
     const mapValuesToProfile = (data) => {
         // todo: icon should be actual icon (de-coupling from icon lib?!)
         // todo: id -> undefined :(
-        return {id: data.id, url: data.profileUrl, title: data.profileTitle, icon: profileIconName}
+        return { id: data.id, url: data.profileUrl, title: data.profileTitle, icon: profileIconName }
     }
 
     // todo: needed?! (sub react ref/id)
@@ -74,14 +74,14 @@ export const SettingProfile = ({ onProfileCreate, onProfileRemove }) => {
         <div>
             {/*
             <ProfileHandle showHandle={!this.props.noDragHandle}/>
-            */}
+            */ }
 
-            <ProfileUrl register={register} errors={errors}/>
-            <ProfileTitle register={register} errors={errors}/>
-            <ProfileIcon icon={profileIconName}/>
+            <ProfileUrl register={ register } errors={ errors }/>
+            <ProfileTitle register={ register } errors={ errors }/>
+            <ProfileIcon icon={ profileIconName }/>
 
-            {onProfileCreate && <ProfileAdd onCreate={onProfileAddHandler} enabled={isValid}/>}
-            {onProfileRemove && <ProfileRemove onRemove={onProfileRemove}/>}
+            { onProfileCreate && <ProfileAdd onCreate={ onProfileAddHandler } enabled={ isValid }/> }
+            { onProfileRemove && <ProfileRemove onRemove={ onProfileRemove }/> }
         </div>
     )
 }
