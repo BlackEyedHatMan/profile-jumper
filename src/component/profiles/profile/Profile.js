@@ -8,7 +8,7 @@ const profile = ({icon, url}) => {
 
   const profileTitle = iconName => iconName.substr(0, 1).toUpperCase() + iconName.substr(1).toLowerCase()
 
-  const linkTitle = profileTitle(icon);
+  const linkTitle = profileTitle(icon)
 
   return (
     <div className="Profile">
@@ -20,4 +20,4 @@ const profile = ({icon, url}) => {
 
 }
 
-export default profile;
+export default profile

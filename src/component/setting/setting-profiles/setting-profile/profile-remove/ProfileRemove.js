@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import './ProfileRemove.css';
+import './ProfileRemove.css'
 
 const profileRemove = (props) => (
   <div className="ProfileRemove">
     <input type="button" value="-" onClick={props.handleRemove}/>
   </div>
-);
+)
 
-export default profileRemove;
+export default profileRemove

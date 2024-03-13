@@ -33,7 +33,7 @@ class SettingsDataExport extends Component {
   }
 
   render() {
-    const profiles = this.props.profiles;
+    const profiles = this.props.profiles
     const enableDisableExport = (!profiles || profiles.length > 0) ? {} : {disabled: "disabled"}
 
     return (

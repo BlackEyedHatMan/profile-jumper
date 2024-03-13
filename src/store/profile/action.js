@@ -61,7 +61,7 @@ export const setProfilesAction = (profiles) => {
 export const retrieveFromPersistentProfilesAction = () => {
   return dispatch => {
     dispatch(initializeProfilesAction())
-    browserStorage && browserStorage.retreiveFromBrowserStorage((browserState) => {
+    browserStorage && browserStorage.retrieveFromBrowserStorage((browserState) => {
         const profiles = objectPropertyArrayOrDefault(browserState, 'profiles')
         dispatch(setProfilesAction(profiles))
     })

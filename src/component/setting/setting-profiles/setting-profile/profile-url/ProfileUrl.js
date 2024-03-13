@@ -57,7 +57,7 @@ class ProfileUrl extends Component {
       <div className="ProfileUrl">
         <input type="text" name="profileUrl" value={profileUrlInput.value} onChange={this.onChangedHandler}  placeholder="URL e.g. https://instagram.com/mrupgradable" {...( this.props.updateExisting && {onBlur: this.props.updateExisting} )} autoComplete="off"/>
       </div>
-    );
+    )
   }
 }
 
