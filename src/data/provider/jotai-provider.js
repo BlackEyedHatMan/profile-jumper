@@ -1,8 +1,9 @@
-import { atom, useAtomValue, useSetAtom } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
+import { atomWithStorage } from 'jotai/utils'
 
 import { useDataContext } from '../../context/DataContext'
 
-const profilesAtom = atom([])
+const profilesAtom = atomWithStorage('profiles', [])
 
 export const useProfiles = () => {
     return useAtomValue(profilesAtom, {

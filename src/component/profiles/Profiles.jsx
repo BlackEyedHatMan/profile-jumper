@@ -1,10 +1,9 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as SolidIcon from '@fortawesome/free-solid-svg-icons'
-import { sortProfilesById } from '../../utility/profile/profile-icon-utility'
 
-import { Profile } from './profile/Profile'
 import { useProfiles } from '../../data/provider/jotai-provider'
+import { Profile } from './profile/Profile'
 
 import './Profiles.css'
 
@@ -27,7 +26,7 @@ export const Profiles = () => {
     if (profiles && profiles.length > 0) {
         profilesListed = (
             <div className="Profiles">
-                { profiles.sort(sortProfilesById).map(profile => (
+                { profiles.map(profile => (
                     <Profile key={ profile.id } id={ profile.id } icon={ profile.icon } url={ profile.url }/>
                 )) }
             </div>
