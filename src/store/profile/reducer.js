@@ -1,5 +1,5 @@
 import { updateObject } from '../utility.js'
-import { generateUniqueId } from '../../utility/identifier/identifierUtility'
+import { generateUniqueId } from '../../utility/identifier/id-utility'
 
 import {
   INITIALIZE_PROFILES,

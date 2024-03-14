@@ -5,7 +5,7 @@ import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
 
 import * as profileActions from '../../../store/profile/action'
 import * as profileIconUtility from '../../../utility/profile/profile-icon-utility'
-import { generateUniqueId } from '../../../utility/identifier/identifierUtility'
+import { generateUniqueId } from '../../../utility/identifier/id-utility'
 
 import './SettingsDataImport.css'
 
