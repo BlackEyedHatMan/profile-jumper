@@ -5,17 +5,17 @@ import { SettingProfile } from './setting-profile/SettingProfile'
 import { insertAfter, insertBefore, obtainNearestParentForClassName } from '../../../utility/native-dom/nativeDomUtility'
 
 import './SettingProfiles.css'
+import { useProfiles, useSetProfiles } from '../../../data/provider/jotai-provider'
+
+//import * as ProfileService from '../../../data/service/profile-service'
 
 const placeholder = document.createElement('div')
 placeholder.className = 'placeholder'
 placeholder.innerHTML = 'Move here...'
 
 const SettingProfiles = () => {
-
-    // todo: init profiles from data store (legacy)
-    // componentDidMount() {
-    //   //this.props.onInitProfiles()
-    // }
+    const profiles = useProfiles()
+    const setProfiles = useSetProfiles()
 
     // todo: need to investigate dragging
     // const dragStart = (e) => {
@@ -56,7 +56,9 @@ const SettingProfiles = () => {
     //     }
     // }
 
-    const settingProfiles = [] //this.props.profiles
+    const onProfileCreate = (profile) => {
+        setProfiles([...profiles, profile])
+    }
 
     return (
         /*<div className="SettingsProfilesContainer" onDragOver={dragOver.bind(this)}>*/
@@ -77,7 +79,7 @@ const SettingProfiles = () => {
             {/*))}*/}
             {/*<SettingProfile addHandler={this.props.onProfileAdd} primaryInput noDragHandle/>*/}
 
-            <SettingProfile/>
+            <SettingProfile onProfileCreate={onProfileCreate}/>
 
         </div>
     )
