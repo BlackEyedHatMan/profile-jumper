@@ -6,8 +6,8 @@ import { FooterInfo } from './footer-info/FooterInfo'
 import './SettingFooter.css'
 
 export const SettingFooter = () => (
-  <div className="SettingFooter">
-    <BrandingLogo/>
-    <FooterInfo/>
-  </div>
+    <div className="SettingFooter">
+        <BrandingLogo/>
+        <FooterInfo/>
+    </div>
 )

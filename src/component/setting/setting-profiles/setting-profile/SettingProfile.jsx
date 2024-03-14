@@ -8,13 +8,13 @@ import * as profileIconUtility from '../../../../utility/profile/profile-icon-ut
 import { ProfileAdd } from './profile-add/ProfileAdd'
 import { ProfileRemove } from './profile-remove/ProfileRemove'
 import { isEntityEmpty } from '../../../../utility/entity/entity-utility'
+import { generateUniqueId } from '../../../../utility/identifier/id-utility'
 
 import './SettingProfile.css'
 
-export const SettingProfile = ({ onProfileCreate, onProfileRemove }) => {
+export const SettingProfile = ({ id, onProfileCreate, onProfileRemove, primaryInput }) => {
     const [profileIconName, setProfileIconName] = useState('')
 
-    // todo: inject profile or fetch from storage (think about SRP)
     const { register, watch, formState: { errors }, handleSubmit } = useForm({
         mode: 'onChange'
     })
@@ -45,25 +45,21 @@ export const SettingProfile = ({ onProfileCreate, onProfileRemove }) => {
 
     const onSubmit = async (data) => {
         let profile = mapValuesToProfile(data)
-        // todo: async -> resetState
         onProfileCreate?.(profile)
         // todo: might need to reuse submission mechanics -> delegate to "handler" e.g. onProfileUpdate
     }
 
-    // todo: should be domain (values->entity & entity->values)
     const mapValuesToProfile = (data) => {
+        const id = data.id || generateUniqueId()
         // todo: icon should be actual icon (de-coupling from icon lib?!)
-        // todo: id -> undefined :(
-        return { id: data.id, url: data.profileUrl, title: data.profileTitle, icon: profileIconName }
+        return { id: id, url: data.profileUrl, title: data.profileTitle, icon: profileIconName }
     }
 
-    // todo: needed?! (sub react ref/id)
-    // const idProperties = (this.props.primaryInput) ? {} : {id: this.props.id}
+    const inputGroupId = (primaryInput) ? {} : {id: id}
 
-    // todo: need improved naming
-    // let className = 'SettingProfile'
-    // if (this.props.primaryInput) className += ' PrimaryInput'
-    //
+    let className = 'SettingProfile'
+    if (primaryInput) className += ' PrimaryInput'
+
     // const draggableOptions = (this.props.noDragHandle) ? {} : {draggable: true, onDragStart: this.props.dragStart, onDragEnd: this.props.dragEnd}
 
     return (
@@ -71,7 +67,7 @@ export const SettingProfile = ({ onProfileCreate, onProfileRemove }) => {
         <div {...idProperties} className={className} {...draggableOptions}>
         */
 
-        <div>
+        <div {...inputGroupId} className={className}>
             {/*
             <ProfileHandle showHandle={!this.props.noDragHandle}/>
             */ }

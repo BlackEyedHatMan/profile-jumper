@@ -6,7 +6,7 @@ import { findProfileIcon, smallIconSize } from '../../../../../utility/profile/p
 import './ProfileIcon.css'
 
 export const ProfileIcon = ({ icon }) => (
-  <div className="SettingProfileIconWrapper">
-    <FontAwesomeIcon icon={findProfileIcon(icon)} size={smallIconSize} className="SettingProfileIcon" />
-  </div>
+    <div className="SettingProfileIconWrapper">
+        <FontAwesomeIcon icon={ findProfileIcon(icon) } size={ smallIconSize } className="SettingProfileIcon"/>
+    </div>
 )

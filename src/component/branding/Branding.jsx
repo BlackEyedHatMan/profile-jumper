@@ -5,11 +5,9 @@ import { BrandingInfo } from './info/BrandingInfo'
 
 import './Branding.css'
 
-const branding = () => (
-  <div className="Branding">
-    <BrandingLogo/>
-    <BrandingInfo/>
-  </div>
+export const Branding = () => (
+    <div className="Branding">
+        <BrandingLogo/>
+        <BrandingInfo/>
+    </div>
 )
-
-export default branding

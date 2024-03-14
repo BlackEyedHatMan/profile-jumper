@@ -1,10 +1,10 @@
 import React from 'react'
 
 import { SettingHeader } from '../../component/setting/setting-header/SettingHeader'
-import SettingProfiles from '../../component/setting/setting-profiles/SettingProfiles'
+import { SettingProfiles } from '../../component/setting/setting-profiles/SettingProfiles'
 import { SettingFooter } from '../../component/setting/setting-footer/SettingFooter'
 
-import Profiles from '../../component/profiles/Profiles'
+import { Profiles } from '../../component/profiles/Profiles'
 
 //import SettingsDataImport from '../../component/data/import/SettingsDataImport'
 //import SettingsDataExport from '../../component/data/export/SettingsDataExport'
