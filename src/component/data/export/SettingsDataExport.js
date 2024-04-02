@@ -31,7 +31,9 @@ export const SettingsDataExport = () => {
 
     const cleanOutputFileData = (profiles) => {
         return profiles.map(profile => {
-            return profile
+            const exportProfile = profile
+            delete exportProfile.id // remove id
+            return exportProfile
         })
     }
 

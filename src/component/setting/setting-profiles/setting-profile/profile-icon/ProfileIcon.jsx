@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { findProfileIcon, smallIconSize } from '../../../../../utility/profile/profile-icon'
 import { ColorPicker } from '../../../../color-picker/ColorPicker'
 
+import { DEFAULT_ICON_COLOUR } from '../../../../../config/constants'
+
 import './ProfileIcon.css'
 
-export const ProfileIcon = ({ icon, onColorChange, color = '#325d97' }) => {
+export const ProfileIcon = ({ icon, onColorChange, color = DEFAULT_ICON_COLOUR }) => {
     const [showColorPicker, setShowColorPicker] = useState(false)
 
     const onColorChoose = (color) => {
@@ -18,7 +21,7 @@ export const ProfileIcon = ({ icon, onColorChange, color = '#325d97' }) => {
 
     return (
         <div className="SettingProfileIconWrapper">
-            <ColorPicker visible={ showColorPicker } onColorChoose={ onColorChoose } defaultColor={color}/>
+            <ColorPicker visible={ showColorPicker } onColorChoose={ onColorChoose } defaultColor={ color }/>
             <FontAwesomeIcon icon={ findProfileIcon(icon) }
                              size={ smallIconSize }
                              className="SettingProfileIcon"

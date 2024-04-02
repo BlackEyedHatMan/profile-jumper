@@ -3,13 +3,16 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
 
-import * as profileActions from '../../../store/profile/action'
-import * as profileIconUtility from '../../../utility/profile/profile-icon-utility'
+import { findProfileIconKeyForTitle } from '../../../utility/profile/profile-icon-utility'
 import { generateUniqueId } from '../../../utility/identifier/id-utility'
+
+import { useSetProfiles } from '../../../data/provider/jotai-provider'
+import { DEFAULT_ICON_COLOUR } from '../../../config/constants'
 
 import './SettingsDataImport.css'
 
-const SettingsDataImport = () => {
+export const SettingsDataImport = () => {
+    const setProfiles = useSetProfiles()
 
     const handleFileDataImport = (e) => {
         const files = e.target.files || e.dataTransfer.files
@@ -27,39 +30,29 @@ const SettingsDataImport = () => {
     }
 
     const processData = (profileSettingsData) => {
-        this.props.onDeleteAllProfiles()
+        const profilesFromData = []
 
         profileSettingsData.forEach((settingProfileData) => {
             const profile = mapDataToProfile(settingProfileData)
-            this.props.onProfileAdd(profile)
+            profilesFromData.push(profile)
         })
+
+        setProfiles(profilesFromData)
     }
 
     const mapDataToProfile = (data) => {
-        const profileId = generateUniqueId()
-        const profileIcon = profileIconUtility.findProfileIconKeyForTitle(data.title)
-        return {id: profileId, url: data.url, title: data.title, icon: profileIcon}
+        const id = data.id || generateUniqueId()
+        const icon = data.icon || findProfileIconKeyForTitle(data.title)
+        const iconColor = data.iconColor || DEFAULT_ICON_COLOUR
+        return { id: id, url: data.url, title: data.title, icon: icon, iconColor: iconColor }
     }
 
     return (
         <div className="SettingsDataImport">
-            <label title="Click here to import profile settings from a file">
-                <FontAwesomeIcon icon={faFileUpload}/>
-                <input type="file" name="settingData" onChange={handleFileDataImport}/>
+            <label title="Click here to import profiles from a file">
+                <FontAwesomeIcon icon={ faFileUpload }/>
+                <input type="file" name="settingData" onChange={ handleFileDataImport }/>
             </label>
         </div>
     )
 }
-
-const mapStateToProps = centralStoreState => {
-    return {profiles: centralStoreState.profileStore.profiles}
-}
-
-const mapDispatcherToProps = (dispatch) => {
-    return {
-        onDeleteAllProfiles: () => dispatch(profileActions.deleteAllProfilesAndPersistAction()),
-        onProfileAdd: (profile) => dispatch(profileActions.createProfileAndPersistAction(profile))
-    }
-}
-
-export default SettingsDataImport

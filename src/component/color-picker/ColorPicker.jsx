@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+
 import Github from '@uiw/react-color-github'
+
+import { DEFAULT_ICON_COLOUR } from '../../config/constants'
 
 import './ColorPicker.css'
 
-export const ColorPicker = ({ visible, onColorChoose, defaultColor='#325d97' }) => {
+export const ColorPicker = ({ visible, onColorChoose, defaultColor=DEFAULT_ICON_COLOUR }) => {
     const [chosenColor, setChosenColor] = useState(defaultColor)
 
     const COLOUR_CHOICES = [
