@@ -1,8 +1,9 @@
 import React from 'react'
 
-import { SettingProfile } from './setting-profile/SettingProfile'
 import { insertAfter, insertBefore, obtainNearestParentForClassName } from '../../../utility/native-dom/nativeDomUtility'
+
 import { useProfiles, useSetProfiles } from '../../../data/provider/jotai-provider'
+import { SettingProfile } from './setting-profile/SettingProfile'
 
 import './SettingProfiles.css'
 
@@ -14,6 +15,8 @@ placeholder.innerHTML = 'Move here...'
 export const SettingProfiles = () => {
     const profiles = useProfiles()
     const setProfiles = useSetProfiles()
+
+    console.log('profiles -> ', JSON.stringify(profiles))
 
     // todo: need to investigate dragging
     // const dragStart = (e) => {
@@ -58,38 +61,37 @@ export const SettingProfiles = () => {
         setProfiles([...profiles, profile])
     }
 
+    const onProfileDelete = (id) => {
+        const profilesWithoutDeleted = profiles.filter(profile => profile.id !== id)
+        setProfiles(profilesWithoutDeleted)
+    }
+
+    const onProfileUpdate = (profile) => {
+        const index = profiles.findIndex((p) => p.id === profile.id)
+        const copyProfiles = [...profiles]
+        copyProfiles[index] = { profile }
+        setProfiles(copyProfiles)
+    }
+
     return (
         /*<div className="SettingsProfilesContainer" onDragOver={dragOver.bind(this)}>*/
 
         <div className="SettingsProfilesContainer">
-            {/*{settingProfiles.map(settingProfile => (*/}
-            {/*    <SettingProfile*/}
-            {/*        key={settingProfile.id}*/}
-            {/*        id={settingProfile.id}*/}
-            {/*        url={settingProfile.url}*/}
-            {/*        title={settingProfile.title}*/}
-            {/*        icon={settingProfile.icon}*/}
-            {/*        updateHandler={this.props.onProfileUpdate}*/}
-            {/*        removeHandler={() => this.props.onProfileRemove(settingProfile.id)}*/}
-            {/*        dragStart={dragStart}*/}
-            {/*        dragEnd={dragEnd}*/}
-            {/*    />*/}
-            {/*))}*/}
-            {/*<SettingProfile addHandler={this.props.onProfileAdd} primaryInput noDragHandle/>*/}
+            {profiles.map(profile => (
+                <SettingProfile
+                    key={profile.id}
+                    id={profile.id}
+                    profile={profile}
+                    onProfileUpdate={onProfileUpdate}
+                    onProfileRemove={() => onProfileDelete(profile.id)}
+                    // dragStart={dragStart}
+                    // dragEnd={dragEnd}
+                />
+            ))}
 
+            {/*<SettingProfile addHandler={this.props.onProfileAdd} primaryInput noDragHandle/>*/}
             <SettingProfile onProfileCreate={onProfileCreate} primaryInput/>
 
         </div>
     )
 }
-
-// todo: double check
-// const mapDispatcherToProps = (dispatch) => {
-//     return {
-//         onInitProfiles: () => dispatch(profileActions.retrieveFromPersistentProfilesAction()),
-//         onProfileAdd: (profile) => dispatch(profileActions.createProfileAndPersistAction(profile)),
-//         onProfileUpdate: (profile) => dispatch(profileActions.updateProfileAndPersistAction(profile)),
-//         onProfileRemove: (id) => dispatch(profileActions.deleteProfileAndPersistAction(id)),
-//         onProfileReorder: (id, beforeId) => dispatch(profileActions.reOrderProfileAndPersistAction(id, beforeId))
-//     }
-// }

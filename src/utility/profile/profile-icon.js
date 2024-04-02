@@ -43,7 +43,7 @@ const findIconKey = (value, IconLib, ignore) => {
 
 export const findProfileIcon = (name) => {
     const DEFAULT_ICON = SolidIcon.faLink
-    if(name === null || name === '' || name.trim() === '') return DEFAULT_ICON
+    if(!name || name.trim() === '') return DEFAULT_ICON
 
     const brandKey = findIconKey(name, BrandIcon, BRAND_ICON_LIB_IGNORE_ENTRIES)
     if(brandKey) return getIconFromLib(brandKey, BrandIcon)

@@ -64,6 +64,12 @@ describe('Profile Icon', () => {
         expect(result.iconName).toBe('link')
     })
 
+    test('should find default link for profile icon when icon is undefined', () => {
+        const result = profileIcon.findProfileIcon(undefined)
+        expect(result).not.toBeNull()
+        expect(result.iconName).toBe('link')
+    })
+
     test('find profile icon for icon explicitly', () => {
         const name = 'Dragon'
         const result = profileIcon.findProfileIcon(name)

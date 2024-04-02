@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { PROFILE_URL, ProfileUrl } from './profile-url/ProfileUrl'
@@ -8,15 +8,17 @@ import * as profileIconUtility from '../../../../utility/profile/profile-icon-ut
 import { ProfileAdd } from './profile-add/ProfileAdd'
 import { ProfileRemove } from './profile-remove/ProfileRemove'
 import { isEntityEmpty } from '../../../../utility/entity/entity-utility'
-import { generateUniqueId } from '../../../../utility/identifier/id-utility'
+import { mapProfileToData, mapValuesToProfile, resetProfileData } from '../../../../data/mapper/profile-data-mapper'
 
 import './SettingProfile.css'
 
-export const SettingProfile = ({ id, onProfileCreate, onProfileRemove, primaryInput }) => {
-    const [profileIconName, setProfileIconName] = useState('')
+export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onProfileUpdate, primaryInput }) => {
+    const [editProfileData, setEditProfileData] = useState(mapProfileToData(profile))
+    const [updated, setUpdated] = useState(false)
 
-    const { register, watch, formState: { errors }, handleSubmit } = useForm({
-        mode: 'onChange'
+    const { register, watch, reset, formState: { errors }, handleSubmit } = useForm({
+        mode: 'onChange',
+        defaultValues: mapProfileToData(profile)
     })
 
     useEffect(() => {
@@ -24,16 +26,30 @@ export const SettingProfile = ({ id, onProfileCreate, onProfileRemove, primaryIn
             const inputValue = (formValue && formValue[name]) ? formValue[name] : ''
             if (name === PROFILE_URL) {
                 const profileIconUrlHint = profileIconUtility.profileIconFromUrl(inputValue)
-                setProfileIconName(profileIconUrlHint)
-                // todo: should override title (perhaps have waterfall, delegated logic)
+                setEditProfileData({ ...editProfileData, profileUrl: inputValue, profileIcon: profileIconUrlHint })
+                setUpdated(true)
             }
             if (name === PROFILE_TITLE) {
-                // todo: look into profileIconUtility.findProfileIconKeyForTitle()
-                setProfileIconName(inputValue)
+                const profileIconTitleHint = profileIconUtility.findProfileIconKeyForTitle(inputValue)
+                setEditProfileData({ ...editProfileData, profileTitle: inputValue, profileIcon: profileIconTitleHint })
+                setUpdated(true)
             }
         })
         return () => subscription.unsubscribe()
     }, [watch])
+
+    useEffect(() => {
+        // no update handler (means should not update)
+        if (onProfileUpdate && updated) {
+            const updateTimer = setTimeout(() => {
+                onProfileUpdate(mapValuesToProfile(editProfileData))
+                setUpdated(false)
+            }, 2000)
+            return () => {
+                clearTimeout(updateTimer)
+            }
+        }
+    }, [updated]);
 
 
     // will be valid 1st time round (onProfileAddHandler -> handleSubmit will re-validate)
@@ -44,18 +60,15 @@ export const SettingProfile = ({ id, onProfileCreate, onProfileRemove, primaryIn
     }
 
     const onSubmit = async (data) => {
-        let profile = mapValuesToProfile(data)
+        let profile = mapValuesToProfile({ ...data, profileUrl: editProfileData.profileUrl })
         onProfileCreate?.(profile)
-        // todo: might need to reuse submission mechanics -> delegate to "handler" e.g. onProfileUpdate
+        resetForm()
     }
 
-    const mapValuesToProfile = (data) => {
-        const id = data.id || generateUniqueId()
-        // todo: icon should be actual icon (de-coupling from icon lib?!)
-        return { id: id, url: data.profileUrl, title: data.profileTitle, icon: profileIconName }
+    const resetForm = () => {
+        setEditProfileData(resetProfileData())
+        reset(resetProfileData())
     }
-
-    const inputGroupId = (primaryInput) ? {} : {id: id}
 
     let className = 'SettingProfile'
     if (primaryInput) className += ' PrimaryInput'
@@ -67,14 +80,14 @@ export const SettingProfile = ({ id, onProfileCreate, onProfileRemove, primaryIn
         <div {...idProperties} className={className} {...draggableOptions}>
         */
 
-        <div {...inputGroupId} className={className}>
+        <div className={ className }>
             {/*
             <ProfileHandle showHandle={!this.props.noDragHandle}/>
             */ }
 
             <ProfileUrl register={ register } errors={ errors }/>
             <ProfileTitle register={ register } errors={ errors }/>
-            <ProfileIcon icon={ profileIconName }/>
+            <ProfileIcon icon={ editProfileData.profileIcon }/>
 
             { onProfileCreate && <ProfileAdd onCreate={ onProfileAddHandler } enabled={ isValid }/> }
             { onProfileRemove && <ProfileRemove onRemove={ onProfileRemove }/> }
