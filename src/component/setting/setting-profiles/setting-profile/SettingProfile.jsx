@@ -62,7 +62,7 @@ export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onPr
     }
 
     const onSubmit = async (data) => {
-        let profile = mapValuesToProfile({...data, profileIcon: editProfileData.profileIcon})
+        let profile = mapValuesToProfile({ ...data, profileIcon: editProfileData.profileIcon, profileIconColor: editProfileData.profileIconColor })
         onProfileCreate?.(profile)
         resetForm()
     }
@@ -75,13 +75,14 @@ export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onPr
     const onIconColorChange = (color) => {
         setEditProfileData(epd => {
             const updatedProfileData = { ...epd, profileIconColor: color }
-            onProfileUpdate(mapValuesToProfile(updatedProfileData))
+            onProfileUpdate?.(mapValuesToProfile(updatedProfileData))
             return updatedProfileData
         })
     }
 
     let className = 'SettingProfile'
     if (primaryInput) className += ' PrimaryInput'
+    if (onProfileUpdate && updated) className += ' Updating'
 
     return (
         <div className={ className }>
@@ -89,7 +90,7 @@ export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onPr
 
             <ProfileUrl register={ register } errors={ errors }/>
             <ProfileTitle register={ register } errors={ errors }/>
-            <ProfileIcon icon={ editProfileData.profileIcon } onColorChange={onIconColorChange} color={editProfileData?.profileIconColor}/>
+            <ProfileIcon icon={ editProfileData.profileIcon } onColorChange={ onIconColorChange } color={ editProfileData?.profileIconColor }/>
 
             { onProfileCreate && <ProfileAdd onCreate={ onProfileAddHandler } enabled={ isValid }/> }
             { onProfileRemove && <ProfileRemove onRemove={ onProfileRemove }/> }
