@@ -5,13 +5,14 @@ export const mapProfileToData = (profile) => {
         id: profile?.id,
         profileUrl: profile?.url,
         profileTitle: profile?.title,
-        profileIcon: profile?.icon
+        profileIcon: profile?.icon,
+        profileIconColor: profile?.iconColor
     }
 }
 
 export const mapValuesToProfile = (data) => {
     const id = data.id || generateUniqueId()
-    return { id: id, url: data.profileUrl, title: data.profileTitle, icon: data.profileIcon }
+    return { id: id, url: data.profileUrl, title: data.profileTitle, icon: data.profileIcon, iconColor: data.profileIconColor }
 }
 
 export const resetProfileData = () => {
@@ -19,7 +20,8 @@ export const resetProfileData = () => {
         id: '',
         profileUrl: '',
         profileTitle: '',
-        profileIcon: ''
+        profileIcon: '',
+        profileColor: ''
     }
 }
 

@@ -11,7 +11,7 @@ export const Profile = ({ profile }) => {
     return (
         <div className="Profile">
             <a href={ profile.url } title={ linkTitle } target="_blank" rel="noopener noreferrer">
-                <ProfileIcon icon={ profile.icon }/>
+                <ProfileIcon icon={ profile.icon } color={ profile.iconColor }/>
             </a>
         </div>
     )

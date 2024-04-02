@@ -29,6 +29,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.10",
+    "@uiw/react-color-github": "^2.1.1",
     "archiver": "^4.0.1",
     "jotai": "^2.7.0",
     "lodash": "^4.17.21",
