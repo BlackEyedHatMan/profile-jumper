@@ -16,7 +16,8 @@ export const ProfileTitle = ({ register, errors }) => {
                    autoComplete='off'
                    className={ inputStyle }
                    { ...register(PROFILE_TITLE, {
-                       required: 'Enter an icon e.g. "Star" to override your link icon'
+                       required: false,
+                       minLength: { value: 2, message: 'Title is too short' },
                    }) }
             />
         </div>

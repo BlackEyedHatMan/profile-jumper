@@ -27,7 +27,7 @@ export const Profiles = () => {
         profilesListed = (
             <div className="Profiles">
                 { profiles.map(profile => (
-                    <Profile key={ profile.id } id={ profile.id } icon={ profile.icon } url={ profile.url }/>
+                    <Profile key={ profile.id } id={ profile.id } profile={ profile }/>
                 )) }
             </div>
         )

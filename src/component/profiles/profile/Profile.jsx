@@ -5,14 +5,13 @@ import { ProfileIcon } from './ProfileIcon/ProfileIcon'
 
 import './Profile.css'
 
-export const Profile = ({ icon, url }) => {
-    const profileTitle = iconName => capitalize(iconName)
-    const linkTitle = profileTitle(icon)
+export const Profile = ({ profile }) => {
+    const linkTitle = profile.title || capitalize(profile.icon)
 
     return (
         <div className="Profile">
-            <a href={ url } title={ linkTitle } target="_blank" rel="noopener noreferrer">
-                <ProfileIcon icon={ icon }/>
+            <a href={ profile.url } title={ linkTitle } target="_blank" rel="noopener noreferrer">
+                <ProfileIcon icon={ profile.icon }/>
             </a>
         </div>
     )
