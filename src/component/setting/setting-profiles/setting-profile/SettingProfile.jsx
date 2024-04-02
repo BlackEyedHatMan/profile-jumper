@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { PROFILE_URL, ProfileUrl } from './profile-url/ProfileUrl'
@@ -9,6 +9,7 @@ import { ProfileAdd } from './profile-add/ProfileAdd'
 import { ProfileRemove } from './profile-remove/ProfileRemove'
 import { isEntityEmpty } from '../../../../utility/entity/entity-utility'
 import { mapProfileToData, mapValuesToProfile, resetProfileData } from '../../../../data/mapper/profile-data-mapper'
+import { ProfileHandle } from './profile-handle/ProfileHandle'
 
 import './SettingProfile.css'
 
@@ -31,6 +32,7 @@ export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onPr
             }
             if (name === PROFILE_TITLE) {
                 const profileIconTitleHint = profileIconUtility.findProfileIconKeyForTitle(inputValue)
+                // todo: race condition (probably for url too)
                 setEditProfileData({ ...editProfileData, profileTitle: inputValue, profileIcon: profileIconTitleHint })
                 setUpdated(true)
             }
@@ -60,7 +62,7 @@ export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onPr
     }
 
     const onSubmit = async (data) => {
-        let profile = mapValuesToProfile({ ...data, profileUrl: editProfileData.profileUrl })
+        let profile = mapValuesToProfile({...data, profileIcon: editProfileData.profileIcon})
         onProfileCreate?.(profile)
         resetForm()
     }
@@ -73,17 +75,9 @@ export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onPr
     let className = 'SettingProfile'
     if (primaryInput) className += ' PrimaryInput'
 
-    // const draggableOptions = (this.props.noDragHandle) ? {} : {draggable: true, onDragStart: this.props.dragStart, onDragEnd: this.props.dragEnd}
-
     return (
-        /*
-        <div {...idProperties} className={className} {...draggableOptions}>
-        */
-
         <div className={ className }>
-            {/*
-            <ProfileHandle showHandle={!this.props.noDragHandle}/>
-            */ }
+            { !primaryInput && <ProfileHandle/> }
 
             <ProfileUrl register={ register } errors={ errors }/>
             <ProfileTitle register={ register } errors={ errors }/>
