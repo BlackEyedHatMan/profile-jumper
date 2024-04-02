@@ -1,56 +1,47 @@
 import React from 'react'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileDownload } from '@fortawesome/free-solid-svg-icons'
 
-import * as profileActions from '../../../store/profile/action'
+import { useProfiles } from '../../../data/provider/jotai-provider'
 
 import './SettingsDataExport.css'
 
-const SettingsDataExport = () => {
+export const SettingsDataExport = () => {
+    const profiles = useProfiles()
 
-  // todo: init profiles from data store (legacy)
-  // componentDidMount() {
-  //   //this.props.onInitProfiles()
-  // }
+    const DOWNLOAD_FILE_MIME_TYPE = 'application/json'
+    const DOWNLOAD_FILE = 'profile-jumper-settings.json'
 
-  const saveDataFileToClient = () => {
-    const settingProfileData = this.props.profiles
-    const cleanedSettingProfileData = cleanOutputFileData(settingProfileData)
+    const saveDataFileToClient = () => {
+        const cleanedSettingProfileData = cleanOutputFileData(profiles)
 
-    const fileData = JSON.stringify(cleanedSettingProfileData)
-    const blob = new Blob([fileData], {type: 'text/plain'})
+        const fileData = JSON.stringify(cleanedSettingProfileData)
+        const blob = new Blob([fileData], { type: DOWNLOAD_FILE_MIME_TYPE })
 
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.download = 'profile-jumper-settings.json'
-    link.href = url
-    link.click()
-  }
+        const url = URL.createObjectURL(blob)
+        createDownloadLink(url)
+    }
 
-  const cleanOutputFileData = (profiles) => {
-    return profiles.map(profile => { return {url: profile.url, title: profile.title }} )
-  }
+    const createDownloadLink = (url) => {
+        const link = document.createElement('a')
+        link.download = DOWNLOAD_FILE
+        link.href = url
+        link.click()
+    }
 
-  const profiles = this.props.profiles
-  const enableDisableExport = (!profiles || profiles.length > 0) ? {} : {disabled: "disabled"}
+    const cleanOutputFileData = (profiles) => {
+        return profiles.map(profile => {
+            return profile
+        })
+    }
+
+    const enableDisableExport = (!profiles || profiles.length > 0) ? {} : { disabled: "disabled" }
 
     return (
-      <div className="SettingsDataExport">
-        <button onClick={saveDataFileToClient} {...enableDisableExport} title="Click here to export profile settings to a file"><FontAwesomeIcon icon={faFileDownload}/></button>
-      </div>
+        <div className="SettingsDataExport">
+            <button onClick={ saveDataFileToClient } { ...enableDisableExport } title="Click here to export profiles to a file">
+                <FontAwesomeIcon icon={ faFileDownload }/>
+            </button>
+        </div>
     )
 }
-
-
-const mapStateToProps = centralStoreState => {
-    return { profiles: centralStoreState.profileStore.profiles }
-}
-
-const mapDispatcherToProps = (dispatch) => {
-    return {
-      onInitProfiles: () => dispatch( profileActions.retrieveFromPersistentProfilesAction() )
-    }
-}
-
-export default SettingsDataExport
