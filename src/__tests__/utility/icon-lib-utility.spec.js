@@ -1,7 +1,7 @@
 import * as faIcons from 'react-icons/fa'
 import * as siIcons from 'react-icons/si'
 
-import { findIconInLibraries, findIconNameForUrl, obtainExactIconInLibraries } from '../../utility/icon/icon-lib-utility'
+import { findIconInLibraries, findIconNameForUrl, findIconNameTitle, obtainExactIconInLibraries } from '../../utility/icon/icon-lib-utility'
 
 describe('LibraryIcon Lib Utility', () => {
 
@@ -96,6 +96,36 @@ describe('LibraryIcon Lib Utility', () => {
 
         const iconName = findIconNameForUrl('https://non-existent-icon.com', iconLibraries)
         expect(iconName).toEqual('Link')
+    })
+
+    test('should find icon name for title', () => {
+        const iconLibraries = new Map()
+        iconLibraries.set('si', siIcons)
+        iconLibraries.set('fa', faIcons)
+
+        const googleIconName = findIconNameTitle('Google', iconLibraries)
+        expect(googleIconName).toEqual('Google')
+
+        const linkedInIconName = findIconNameTitle('linkedIn', iconLibraries)
+        expect(linkedInIconName).toEqual('Linkedin')
+    })
+
+    test('should find default icon name for title which does not have icon', () => {
+        const iconLibraries = new Map()
+        iconLibraries.set('si', siIcons)
+        iconLibraries.set('fa', faIcons)
+
+        const iconName = findIconNameTitle('Non-Existent-Icon', iconLibraries)
+        expect(iconName).toEqual('Link')
+    })
+
+    test('should find icon name for title nearest match', () => {
+        const iconLibraries = new Map()
+        iconLibraries.set('si', siIcons)
+        iconLibraries.set('fa', faIcons)
+
+        expect(findIconNameTitle('Goo', iconLibraries)).toEqual('Google')
+        expect(findIconNameTitle('Good', iconLibraries)).toEqual('Goodreads')
     })
 
 })

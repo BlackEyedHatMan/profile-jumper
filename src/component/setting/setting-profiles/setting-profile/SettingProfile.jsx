@@ -4,13 +4,12 @@ import { useForm } from 'react-hook-form'
 import { PROFILE_URL, ProfileUrl } from './profile-url/ProfileUrl'
 import { PROFILE_TITLE, ProfileTitle } from './profile-title/ProfileTitle'
 import { SettingProfileIcon } from './profile-icon/SettingProfileIcon'
-import * as profileIconUtility from '../../../../utility/profile/profile-icon-utility'
 import { ProfileAdd } from './profile-add/ProfileAdd'
 import { ProfileRemove } from './profile-remove/ProfileRemove'
 import { isEntityEmpty } from '../../../../utility/entity/entity-utility'
 import { mapProfileToData, mapValuesToProfile, resetProfileData } from '../../../../data/mapper/profile-data-mapper'
 import { ProfileHandle } from './profile-handle/ProfileHandle'
-import { findIconNameForUrl } from '../../../../utility/icon/icon-lib-utility'
+import { findIconNameForUrl, findIconNameTitle } from '../../../../utility/icon/icon-lib-utility'
 
 import './SettingProfile.css'
 
@@ -32,9 +31,8 @@ export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onPr
                 setUpdated(true)
             }
             if (name === PROFILE_TITLE) {
-                // todo: need utility for icon name -> title
-                const profileIconTitleHint = profileIconUtility.findProfileIconKeyForTitle(inputValue)
-                setEditProfileData({ ...editProfileData, profileTitle: inputValue, profileIcon: profileIconTitleHint })
+                const profileIconForTitle = findIconNameTitle(inputValue)
+                setEditProfileData({ ...editProfileData, profileTitle: inputValue, profileIcon: profileIconForTitle })
                 setUpdated(true)
             }
         })

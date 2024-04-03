@@ -17,3 +17,8 @@ export const hasValue = (value) => {
     if(!value) return false
     return value.trim().length !== 0;
 }
+
+export const contains = (value, sought) => {
+    if(!hasValue(value) || !hasValue(sought)) return false
+    return normValueForCompare(value).includes(normValueForCompare(sought))
+}

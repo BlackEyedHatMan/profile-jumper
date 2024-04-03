@@ -1,4 +1,4 @@
-import { capitalize, hasValue, isSame } from '../../utility/string/string-utility'
+import { capitalize, contains, hasValue, isSame } from '../../utility/string/string-utility'
 
 describe('String Utility', () => {
 
@@ -51,6 +51,22 @@ describe('String Utility', () => {
         expect(hasValue(null)).toBeFalsy()
         expect(hasValue('')).toBeFalsy()
         expect(hasValue('    ')).toBeFalsy()
+    })
+
+    test('should contain string value', () => {
+        expect(contains('Catty', 'Cat')).toBeTruthy()
+        expect(contains('Profile', 'Pro')).toBeTruthy()
+    })
+
+    test('should not contain string value when either value is invalid', () => {
+        expect(contains('Catty', undefined)).toBeFalsy()
+        expect(contains('Catty', null)).toBeFalsy()
+        expect(contains(undefined, 'Cat')).toBeFalsy()
+        expect(contains(null, 'Cat')).toBeFalsy()
+        expect(contains(undefined, undefined)).toBeFalsy()
+        expect(contains(null, null)).toBeFalsy()
+        expect(contains(undefined, null)).toBeFalsy()
+        expect(contains(null, undefined)).toBeFalsy()
     })
 
 })
