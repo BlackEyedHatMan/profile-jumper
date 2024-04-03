@@ -1,3 +1,5 @@
+
+// todo: need to handle hints!
 const profileIconHints = {
     timebomb: 'Bomb',
     study: 'GraduationCap',
