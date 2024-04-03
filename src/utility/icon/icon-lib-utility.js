@@ -1,16 +1,16 @@
 import { contains, hasValue, isSame } from '../string/string-utility'
 import { DEFAULT_ICON_NAME, IconLibraries } from '../../config/IconLibraries'
 
-export const obtainExactIconInLibraries = (name, iconLibraries) => {
+export const obtainExactIconInLibraries = (exactIconName, iconLibraries=IconLibraries) => {
     const ICON_NOT_FOUND = undefined
-    if (!hasValue(name)) return ICON_NOT_FOUND
-    const libKey = name.substring(0, 2).toLowerCase()
+    if (!hasValue(exactIconName)) return ICON_NOT_FOUND
+    const libKey = exactIconName.substring(0, 2).toLowerCase()
     const iconLib = iconLibraries.get(libKey)
     if (!iconLib) return ICON_NOT_FOUND
-    return iconLib[name]
+    return iconLib[exactIconName]
 }
 
-export const findIconInLibraries = (name, iconLibraries) => {
+export const findIconInLibraries = (name, iconLibraries=IconLibraries) => {
     if (!hasValue(name)) return undefined
     const foundIcons = []
     for (const [key, lib] of iconLibraries.entries()) {

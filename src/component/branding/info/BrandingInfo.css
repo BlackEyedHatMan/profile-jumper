@@ -50,6 +50,11 @@
   text-align: right;
 }
 
+.ConfigureInfo svg {
+  width: 46px;
+  height: 46px;
+}
+
 .ConfigureClick {
   color: #8c8c8c;
   text-decoration: none;

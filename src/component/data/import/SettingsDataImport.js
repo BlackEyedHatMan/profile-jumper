@@ -1,13 +1,11 @@
 import React from 'react'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
-
-import { findProfileIconKeyForTitle } from '../../../utility/profile/profile-icon-utility'
 import { generateUniqueId } from '../../../utility/identifier/id-utility'
 
 import { useSetProfiles } from '../../../data/provider/jotai-provider'
 import { DEFAULT_ICON_COLOUR } from '../../../config/constants'
+import { DisplayIcon } from '../../icon/DisplayIcon'
+import { findIconNameTitle } from '../../../utility/icon/icon-lib-utility'
 
 import './SettingsDataImport.css'
 
@@ -42,7 +40,7 @@ export const SettingsDataImport = () => {
 
     const mapDataToProfile = (data) => {
         const id = data.id || generateUniqueId()
-        const icon = data.icon || findProfileIconKeyForTitle(data.title)
+        const icon = data.icon || findIconNameTitle(data.title)
         const iconColor = data.iconColor || DEFAULT_ICON_COLOUR
         return { id: id, url: data.url, title: data.title, icon: icon, iconColor: iconColor }
     }
@@ -50,7 +48,7 @@ export const SettingsDataImport = () => {
     return (
         <div className="SettingsDataImport">
             <label title="Click here to import profiles from a file">
-                <FontAwesomeIcon icon={ faFileUpload }/>
+                <DisplayIcon icon="FaFileUpload"/>
                 <input type="file" name="settingData" onChange={ handleFileDataImport }/>
             </label>
         </div>

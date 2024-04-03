@@ -1,8 +1,7 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFileDownload } from '@fortawesome/free-solid-svg-icons'
 
 import { useProfiles } from '../../../data/provider/jotai-provider'
+import { DisplayIcon } from '../../icon/DisplayIcon'
 
 import './SettingsDataExport.css'
 
@@ -42,7 +41,7 @@ export const SettingsDataExport = () => {
     return (
         <div className="SettingsDataExport">
             <button onClick={ saveDataFileToClient } { ...enableDisableExport } title="Click here to export profiles to a file">
-                <FontAwesomeIcon icon={ faFileDownload }/>
+                <DisplayIcon icon="FaFileDownload"/>
             </button>
         </div>
     )

@@ -1,5 +1,3 @@
-import * as profileIcon from './profile-icon'
-
 const profileIconHints = {
     timebomb: 'Bomb',
     study: 'GraduationCap',
@@ -26,23 +24,3 @@ const findProfileIconHint = (url) => {
     }
     return ''
 }
-
-const scrubUrlParts = (url) => {
-    const urlWithoutPreAndTldPartsRegex = /^(http|s|:|\/)*|(\.\w+)$/gi
-    return url.replace(urlWithoutPreAndTldPartsRegex, '').trim()
-}
-
-const findProfileIconKeyForUrl = (url) => {
-    const urlScrubbed = scrubUrlParts(url)
-    return profileIcon.findProfileIconKey(urlScrubbed)
-}
-
-export const profileIconFromUrl = url => {
-    return findProfileIconHint(url) || findProfileIconKeyForUrl(url) || ''
-}
-
-export const findProfileIconKeyForTitle = (title) => {
-    return findProfileIconHint(title) || profileIcon.findProfileIconKey(title) || ''
-}
-
-export const sortProfilesById = (a, b) => a.id - b.id

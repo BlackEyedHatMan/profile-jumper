@@ -1,9 +1,7 @@
 import React from 'react'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as SolidIcon from '@fortawesome/free-solid-svg-icons'
-
 import { APP_VERSION } from '../../../config/constants.js'
+import { DisplayIcon } from '../../icon/DisplayIcon'
 
 import './BrandingInfo.css'
 
@@ -15,8 +13,9 @@ export const BrandingInfo = () => (
             <p>Jump between any of your online profiles! Click on cogs or right-click icon for "options" to configure instantly.</p>
         </div>
         <div className="ConfigureInfo">
-            <a className="ConfigureClick" href="#settings" target="_blank" rel="noopener noreferrer"
-               title="Click here to configure - Profile Jumper!"><FontAwesomeIcon icon={ SolidIcon.faCogs } size="2x"/></a>
+            <a className="ConfigureClick" href="#settings" target="_blank" rel="noopener noreferrer" title="Click here to configure - Profile Jumper!">
+                <DisplayIcon icon="FaCogs"/>
+            </a>
         </div>
     </React.Fragment>
 )
