@@ -1,5 +1,5 @@
-import { contains, hasValue, isSame } from '../string/string-utility'
-import { DEFAULT_ICON_NAME, IconLibraries } from '../../config/IconLibraries'
+import { contains, hasValue, isSame, normForCompare } from '../string/string-utility'
+import { DEFAULT_ICON_NAME, IconAliases, IconLibraries } from '../../config/IconLibraries'
 import { scrubUrlParts } from '../url/url-utility'
 
 export const obtainExactIconInLibraries = (exactIconName, iconLibraries = IconLibraries) => {
@@ -13,13 +13,19 @@ export const obtainExactIconInLibraries = (exactIconName, iconLibraries = IconLi
 
 export const findIconInLibraries = (name, iconLibraries = IconLibraries) => {
     if (!hasValue(name)) return undefined
+    const soughtIconName = preferAliasedIcon(name)
     const foundIcons = []
     for (const [key, lib] of iconLibraries.entries()) {
-        const iconsFound = findIconsInLibrary(name, lib, key)
+        const iconsFound = findIconsInLibrary(soughtIconName, lib, key)
         if (iconsFound) foundIcons.push(iconsFound)
     }
     foundIcons.sort(sizeSort)
     return (foundIcons.length === 0) ? undefined : foundIcons[0][1]
+}
+
+const preferAliasedIcon = (name) => {
+    const normedValue = normForCompare(name)
+    return (IconAliases.has(normedValue)) ? IconAliases.get(normedValue) : name
 }
 
 const findIconsInLibrary = (name, iconLib, libKey) => {

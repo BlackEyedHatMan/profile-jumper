@@ -128,4 +128,24 @@ describe('LibraryIcon Lib Utility', () => {
         expect(findIconNameTitle('Good', iconLibraries)).toEqual('Goodreads')
     })
 
+    test('should find icon name for aliases as priority over icon library names', () => {
+        const iconLibraries = new Map()
+        iconLibraries.set('si', siIcons)
+        iconLibraries.set('fa', faIcons)
+
+        expect(findIconNameTitle('study', iconLibraries)).toEqual('GraduationCap')
+        expect(findIconNameTitle('analytics', iconLibraries)).toEqual('ChartLine')
+        expect(findIconNameTitle('booking', iconLibraries)).toEqual('Hotel')
+        expect(findIconNameTitle('broker', iconLibraries)).toEqual('Handshake')
+        expect(findIconNameTitle('code', iconLibraries)).toEqual('LaptopCode')
+        expect(findIconNameTitle('chrome webstore', iconLibraries)).toEqual('Chrome')
+        expect(findIconNameTitle('credit', iconLibraries)).toEqual('FileInvoiceDollar')
+        expect(findIconNameTitle('derivatives', iconLibraries)).toEqual('FileContract')
+        expect(findIconNameTitle('email', iconLibraries)).toEqual('Envelope')
+        expect(findIconNameTitle('finance', iconLibraries)).toEqual('ChartBar')
+        expect(findIconNameTitle('gov', iconLibraries)).toEqual('Archway')
+        expect(findIconNameTitle('news', iconLibraries)).toEqual('Newspaper')
+        expect(findIconNameTitle('vpn', iconLibraries)).toEqual('UserShield')
+    })
+
 })

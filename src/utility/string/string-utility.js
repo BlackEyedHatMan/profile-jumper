@@ -5,12 +5,7 @@ export const capitalize = (value) => {
 }
 
 export const isSame = (value, sought) => {
-    return normValueForCompare(value) === normValueForCompare(sought)
-}
-
-const normValueForCompare = (value) => {
-    if(!hasValue(value)) return value
-    return value.toLowerCase().trim()
+    return normForCompare(value) === normForCompare(sought)
 }
 
 export const hasValue = (value) => {
@@ -20,5 +15,10 @@ export const hasValue = (value) => {
 
 export const contains = (value, sought) => {
     if(!hasValue(value) || !hasValue(sought)) return false
-    return normValueForCompare(value).includes(normValueForCompare(sought))
+    return normForCompare(value).includes(normForCompare(sought))
+}
+
+export const normForCompare = (value) => {
+    if(!hasValue(value)) return value
+    return value.toLowerCase().trim()
 }
