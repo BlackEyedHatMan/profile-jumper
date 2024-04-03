@@ -1,6 +1,6 @@
 import * as profileIcon from '../../utility/profile/profile-icon'
 
-describe('Profile Icon', () => {
+describe('Profile LibraryIcon', () => {
 
     test('find solid profile icon for name', () => {
         const name = 'Ad'
@@ -38,7 +38,7 @@ describe('Profile Icon', () => {
     })
 
     test('find default link for profile icon if icon cannot be found for name', () => {
-        const name = '!Non-Existing-Icon-Name!'
+        const name = '!Non-Existing-LibraryIcon-Name!'
         const result = profileIcon.findProfileIcon(name)
         expect(result).not.toBeNull()
         expect(result.iconName).toBe('link')

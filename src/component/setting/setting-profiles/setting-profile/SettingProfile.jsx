@@ -3,13 +3,14 @@ import { useForm } from 'react-hook-form'
 
 import { PROFILE_URL, ProfileUrl } from './profile-url/ProfileUrl'
 import { PROFILE_TITLE, ProfileTitle } from './profile-title/ProfileTitle'
-import { ProfileIcon } from './profile-icon/ProfileIcon'
+import { SettingProfileIcon } from './profile-icon/SettingProfileIcon'
 import * as profileIconUtility from '../../../../utility/profile/profile-icon-utility'
 import { ProfileAdd } from './profile-add/ProfileAdd'
 import { ProfileRemove } from './profile-remove/ProfileRemove'
 import { isEntityEmpty } from '../../../../utility/entity/entity-utility'
 import { mapProfileToData, mapValuesToProfile, resetProfileData } from '../../../../data/mapper/profile-data-mapper'
 import { ProfileHandle } from './profile-handle/ProfileHandle'
+import { findIconNameForUrl } from '../../../../utility/icon/icon-lib-utility'
 
 import './SettingProfile.css'
 
@@ -26,13 +27,13 @@ export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onPr
         const subscription = watch((formValue, { name }) => {
             const inputValue = (formValue && formValue[name]) ? formValue[name] : ''
             if (name === PROFILE_URL) {
-                const profileIconUrlHint = profileIconUtility.profileIconFromUrl(inputValue)
-                setEditProfileData({ ...editProfileData, profileUrl: inputValue, profileIcon: profileIconUrlHint })
+                const profileIconForUrl = findIconNameForUrl(inputValue)
+                setEditProfileData({ ...editProfileData, profileUrl: inputValue, profileIcon: profileIconForUrl })
                 setUpdated(true)
             }
             if (name === PROFILE_TITLE) {
+                // todo: need utility for icon name -> title
                 const profileIconTitleHint = profileIconUtility.findProfileIconKeyForTitle(inputValue)
-                // todo: race condition (probably for url too)
                 setEditProfileData({ ...editProfileData, profileTitle: inputValue, profileIcon: profileIconTitleHint })
                 setUpdated(true)
             }
@@ -90,7 +91,7 @@ export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onPr
 
             <ProfileUrl register={ register } errors={ errors }/>
             <ProfileTitle register={ register } errors={ errors }/>
-            <ProfileIcon icon={ editProfileData.profileIcon } onColorChange={ onIconColorChange } color={ editProfileData?.profileIconColor }/>
+            <SettingProfileIcon iconName={ editProfileData.profileIcon } onColorChange={ onIconColorChange } color={ editProfileData?.profileIconColor }/>
 
             { onProfileCreate && <ProfileAdd onCreate={ onProfileAddHandler } enabled={ isValid }/> }
             { onProfileRemove && <ProfileRemove onRemove={ onProfileRemove }/> }

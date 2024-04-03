@@ -10,6 +10,8 @@
   vertical-align: bottom;
   opacity: 1;
   backface-visibility: hidden;
+  width: 40px;
+  height: 40px;
 }
 
 .ProfileIcon:hover {

@@ -1,6 +1,6 @@
 import * as profileIconUtility from '../../utility/profile/profile-icon-utility'
 
-describe('Profile Icon Utility', () => {
+describe('Profile LibraryIcon Utility', () => {
 
     test('should get profile icon hint for URL', () => {
         const URL = 'https://timebomb.today'
