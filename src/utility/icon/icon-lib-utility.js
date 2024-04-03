@@ -1,7 +1,8 @@
 import { contains, hasValue, isSame } from '../string/string-utility'
 import { DEFAULT_ICON_NAME, IconLibraries } from '../../config/IconLibraries'
+import { scrubUrlParts } from '../url/url-utility'
 
-export const obtainExactIconInLibraries = (exactIconName, iconLibraries=IconLibraries) => {
+export const obtainExactIconInLibraries = (exactIconName, iconLibraries = IconLibraries) => {
     const ICON_NOT_FOUND = undefined
     if (!hasValue(exactIconName)) return ICON_NOT_FOUND
     const libKey = exactIconName.substring(0, 2).toLowerCase()
@@ -10,7 +11,7 @@ export const obtainExactIconInLibraries = (exactIconName, iconLibraries=IconLibr
     return iconLib[exactIconName]
 }
 
-export const findIconInLibraries = (name, iconLibraries=IconLibraries) => {
+export const findIconInLibraries = (name, iconLibraries = IconLibraries) => {
     if (!hasValue(name)) return undefined
     const foundIcons = []
     for (const [key, lib] of iconLibraries.entries()) {
@@ -30,7 +31,7 @@ const findIconsInLibrary = (name, iconLib, libKey) => {
         if (contains(libIconNameNormed, name)) foundIcons.push([libIconName, iconLib[libIconName]])
     }
 
-    if(!foundIcons || foundIcons.length === 0) return undefined
+    if (!foundIcons || foundIcons.length === 0) return undefined
 
     foundIcons.sort((a, b) => relevanceSort(a, b, name))
     foundIcons.sort(sizeSort)
@@ -41,8 +42,8 @@ const findIconsInLibrary = (name, iconLib, libKey) => {
 const relevanceSort = (a, b, name) => {
     const normedA = a[0]
     const normedB = b[0]
-    if(normedA.startsWith(name)) return -1
-    if(normedB.startsWith(name)) return 1
+    if (normedA.startsWith(name)) return -1
+    if (normedB.startsWith(name)) return 1
 }
 
 const sizeSort = (a, b) => {
@@ -51,24 +52,19 @@ const sizeSort = (a, b) => {
     return normedA.length - normedB.length
 }
 
-export const findIconNameForUrl = (url, iconLibraries=IconLibraries) => {
+export const findIconNameForUrl = (url, iconLibraries = IconLibraries) => {
     const urlScrubbed = scrubUrlParts(url)
     const foundResult = findIconInLibraries(urlScrubbed, iconLibraries)
     if (foundResult) return normIconName(foundResult.name)
     return normIconName(DEFAULT_ICON_NAME)
 }
 
-const scrubUrlParts = (url) => {
-    const urlWithoutPreAndTldPartsRegex = /^(http|s|:|\/)*|(\.\w+)$/gi
-    return url.replace(urlWithoutPreAndTldPartsRegex, '').trim()
-}
-
-export const findIconNameTitle = (title, iconLibraries=IconLibraries) => {
+export const findIconNameTitle = (title, iconLibraries = IconLibraries) => {
     const foundResult = findIconInLibraries(title, iconLibraries)
     if (foundResult) return normIconName(foundResult.name)
     return normIconName(DEFAULT_ICON_NAME)
 }
 
-const normIconName = (iconName, keyLen=2) => {
+const normIconName = (iconName, keyLen = 2) => {
     return iconName.substring(keyLen)
 }

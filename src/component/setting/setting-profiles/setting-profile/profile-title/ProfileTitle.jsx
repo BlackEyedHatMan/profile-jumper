@@ -17,7 +17,7 @@ export const ProfileTitle = ({ register, errors }) => {
                    className={ inputStyle }
                    { ...register(PROFILE_TITLE, {
                        required: false,
-                       minLength: { value: 2, message: 'Title is too short' },
+                       minLength: { value: 1, message: 'Title is too short' },
                    }) }
             />
         </div>
