@@ -40,7 +40,7 @@ export const SettingsDataExport = () => {
 
     return (
         <div className="SettingsDataExport">
-            <button onClick={ saveDataFileToClient } { ...enableDisableExport } title="Click here to export profiles to a file">
+            <button onClick={ saveDataFileToClient } { ...enableDisableExport } title="Click here to export your profiles to a file">
                 <DisplayIcon icon="FaFileDownload"/>
             </button>
         </div>

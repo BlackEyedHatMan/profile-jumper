@@ -1,25 +1,30 @@
 .SettingHeader {
-  display: block;
-  padding: 5px;
-  margin-bottom: 20px;
+    display: block;
+    padding: 5px;
+    margin-bottom: 20px;
 }
 
 .SettingInfo {
-  display: inline-block;
-  vertical-align: top;
-  padding: 2px;
-  margin-left: 10px;
-  text-align: left;
+    display: inline-block;
+    vertical-align: top;
+    padding: 2px;
+    margin-left: 10px;
+    text-align: left;
 }
 
 .SettingInfo h1 {
-  color: #367532;
-  margin: 5px;
-  font-size: 18px;
+    color: #367532;
+    margin: 5px;
+    font-size: 18px;
+}
+
+.SettingInfo h1 span {
+    color: #000;
+    margin-left: 10px;
 }
 
 .SettingInfo p {
-  color: #000;
-  font-size: 12px;
-  margin: 5px;
+    color: #000;
+    font-size: 12px;
+    margin: 5px;
 }

@@ -11,6 +11,7 @@ IconLibraries.set('fa', faIcons)
 
 export const IconAliases = new Map(Object.entries({
     'analytics': 'ChartLine',
+    'automata': 'Pushed',
     'bank': 'PiggyBank',
     'booking': 'Hotel',
     'broker': 'Handshake',

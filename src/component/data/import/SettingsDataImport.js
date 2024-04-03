@@ -47,7 +47,7 @@ export const SettingsDataImport = () => {
 
     return (
         <div className="SettingsDataImport">
-            <label title="Click here to import profiles from a file">
+            <label title="Click here to import your profiles from a file">
                 <DisplayIcon icon="FaFileUpload"/>
                 <input type="file" name="settingData" onChange={ handleFileDataImport }/>
             </label>

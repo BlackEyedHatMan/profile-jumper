@@ -12,7 +12,7 @@ export const ProfileTitle = ({ register, errors }) => {
         <div className='ProfileTitle'>
             { errorShow }
             <input type='text'
-                   placeholder="LibraryIcon e.g. Star"
+                   placeholder="Icon name e.g. Star"
                    autoComplete='off'
                    className={ inputStyle }
                    { ...register(PROFILE_TITLE, {

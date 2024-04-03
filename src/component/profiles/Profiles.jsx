@@ -11,11 +11,11 @@ export const Profiles = () => {
 
     let profilesListed = (
         <div className="NoProfiles">
-            <h1>Setup Profiles</h1>
-            <p>Click on the gears icon to add some profiles...</p>
+            <h1>Setup Your Profile Links</h1>
+            <p>Click the "gears" icon below to add your profiles links...</p>
 
             <div className="ConfigureInfo">
-                <a className="ConfigureClick" href="#settings" target="_blank" rel="noopener noreferrer" title="Click here to configure - Profile Jumper!">
+                <a className="ConfigureClick" href="#settings" target="_blank" rel="noopener noreferrer" title="Click here to update your profile links - Profile Jumper!">
                     <DisplayIcon icon="FaCogs"/>
                 </a>
             </div>
