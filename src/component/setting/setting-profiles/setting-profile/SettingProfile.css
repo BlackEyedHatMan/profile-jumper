@@ -16,3 +16,8 @@
 .Updating {
     background-color: #fffbb8;
 }
+
+.Dragging {
+    background-color: #a9eaa9;
+    border-color: #7cd37c;
+}

@@ -13,7 +13,7 @@ import { findIconNameForUrl, findIconNameTitle } from '../../../../utility/icon/
 
 import './SettingProfile.css'
 
-export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onProfileUpdate, primaryInput }) => {
+export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onProfileUpdate, primaryInput, isDragging }) => {
     const [editProfileData, setEditProfileData] = useState(mapProfileToData(profile))
     const [updated, setUpdated] = useState(false)
 
@@ -82,6 +82,7 @@ export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onPr
     let className = 'SettingProfile'
     if (primaryInput) className += ' PrimaryInput'
     if (onProfileUpdate && updated) className += ' Updating'
+    if (isDragging) className += ' Dragging'
 
     return (
         <div className={ className }>
