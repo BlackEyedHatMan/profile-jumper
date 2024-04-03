@@ -138,8 +138,9 @@ describe('LibraryIcon Lib Utility', () => {
         expect(findIconNameTitle('booking', iconLibraries)).toEqual('Hotel')
         expect(findIconNameTitle('bank', iconLibraries)).toEqual('PiggyBank')
         expect(findIconNameTitle('broker', iconLibraries)).toEqual('Handshake')
-        expect(findIconNameTitle('code', iconLibraries)).toEqual('LaptopCode')
         expect(findIconNameTitle('chrome webstore', iconLibraries)).toEqual('Chrome')
+        expect(findIconNameTitle('code', iconLibraries)).toEqual('LaptopCode')
+        expect(findIconNameTitle('company', iconLibraries)).toEqual('Building')
         expect(findIconNameTitle('credit', iconLibraries)).toEqual('FileInvoiceDollar')
         expect(findIconNameTitle('derivatives', iconLibraries)).toEqual('FileContract')
         expect(findIconNameTitle('email', iconLibraries)).toEqual('Envelope')
@@ -147,6 +148,7 @@ describe('LibraryIcon Lib Utility', () => {
         expect(findIconNameTitle('gov', iconLibraries)).toEqual('Archway')
         expect(findIconNameTitle('news', iconLibraries)).toEqual('Newspaper')
         expect(findIconNameTitle('study', iconLibraries)).toEqual('GraduationCap')
+        expect(findIconNameTitle('tfl', iconLibraries)).toEqual('Transportforlondon')
         expect(findIconNameTitle('vpn', iconLibraries)).toEqual('UserShield')
     })
 

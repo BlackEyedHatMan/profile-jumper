@@ -35,7 +35,7 @@ export const OrderedSettingProfiles = ({ onProfileUpdate, onProfileDelete }) => 
 
     const ProfileList = React.memo(function ({ profiles }) {
         return profiles.map((profile, index) => (
-            <Draggable draggableId={ profile.id } index={ index }>
+            <Draggable draggableId={ profile.id } index={ index } key={ index }>
                 { (provided, snapshot) => (
                     <div ref={ provided.innerRef } { ...provided.draggableProps } { ...provided.dragHandleProps }>
                         <SettingProfile

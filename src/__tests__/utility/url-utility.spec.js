@@ -26,5 +26,9 @@ describe('URL Utility', () => {
         expect(scrubUrlParts('https://www.instagram.com/mrupgradable/?hl=en')).toEqual('instagram')
     })
 
+    test('should obtain name from url with unconventional domain tld', () => {
+        expect(scrubUrlParts('https://someones.technology')).toEqual('someones')
+        expect(scrubUrlParts('https://www.someones.technology')).toEqual('someones')
+    })
 
 })

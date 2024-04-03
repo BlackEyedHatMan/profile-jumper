@@ -4,11 +4,13 @@ import { ColorPicker } from '../../../../color-picker/ColorPicker'
 
 import { DEFAULT_ICON_COLOUR } from '../../../../../config/constants'
 import { LibraryIcon } from '../../../../icon/LibraryIcon'
+import { useOutsideClick } from '../../../../../hooks/useOutsideClick'
 
 import './SettingProfileIcon.css'
 
 export const SettingProfileIcon = ({ iconName, onColorChange, color = DEFAULT_ICON_COLOUR }) => {
     const [showColorPicker, setShowColorPicker] = useState(false)
+    const ref = useOutsideClick(() => setShowColorPicker(false))
 
     const onColorChoose = (color) => {
         onColorChange(color)
@@ -19,7 +21,7 @@ export const SettingProfileIcon = ({ iconName, onColorChange, color = DEFAULT_IC
 
     return (
         <div className="SettingProfileIconWrapper">
-            <ColorPicker visible={ showColorPicker } onColorChoose={ onColorChoose } defaultColor={ color }/>
+            <ColorPicker visible={ showColorPicker } onColorChoose={ onColorChoose } defaultColor={ color } ref={ ref }/>
             <LibraryIcon name={ iconName } color={ color } className="SettingProfileIcon" onClick={ toggleColorPicker }/>
         </div>
     )

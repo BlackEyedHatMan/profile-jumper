@@ -17,6 +17,7 @@ export const IconAliases = new Map(Object.entries({
     'broker': 'Handshake',
     'chrome webstore' : 'Chrome',
     'code': 'LaptopCode',
+    'company': 'Building',
     'credit': 'FileInvoiceDollar',
     'crypto': 'Btc',
     'derivatives': 'FileContract',
@@ -25,5 +26,6 @@ export const IconAliases = new Map(Object.entries({
     'gov': 'Archway',
     'news': 'Newspaper',
     'study': 'GraduationCap',
+    'tfl': 'Transportforlondon',
     'vpn': 'UserShield'
 }))

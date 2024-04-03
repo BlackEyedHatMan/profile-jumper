@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 
 import Github from '@uiw/react-color-github'
 
-import { DEFAULT_ICON_COLOUR } from '../../config/constants'
-
 import './ColorPicker.css'
 
-export const ColorPicker = ({ visible, onColorChoose, defaultColor=DEFAULT_ICON_COLOUR }) => {
-    const [chosenColor, setChosenColor] = useState(defaultColor)
+//const ColorPicker = React.forwardRef({ visible, onColorChoose, defaultColor=DEFAULT_ICON_COLOUR, ref }) => {
+export const ColorPicker = React.forwardRef((props, ref ) => {
+    const [chosenColor, setChosenColor] = useState(props.defaultColor)
 
     const COLOUR_CHOICES = [
         '#B80000',
@@ -30,12 +29,12 @@ export const ColorPicker = ({ visible, onColorChoose, defaultColor=DEFAULT_ICON_
 
     const onChangeColor = (color) => {
         setChosenColor(color.hex)
-        onColorChoose(color.hex)
+        props.onColorChoose(color.hex)
     }
 
     return (
         <div className="ColorPickerWrapper">
-            { visible && <Github className="ColorPicker"
+            { props.visible && <Github className="ColorPicker" ref={ref}
                 colors={COLOUR_CHOICES}
                 color={ chosenColor }
                 placement="BL"
@@ -46,4 +45,4 @@ export const ColorPicker = ({ visible, onColorChoose, defaultColor=DEFAULT_ICON_
             /> }
         </div>
     )
-}
+})
