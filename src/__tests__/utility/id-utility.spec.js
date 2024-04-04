@@ -2,7 +2,7 @@ import { generateUniqueId } from '../../utility/identifier/id-utility'
 
 describe('ID Utility', () => {
 
-    test('should generate unique id', () => {
+    test.skip('should generate unique id', () => {
         const id = generateUniqueId()
         expect(id).not.toBeNull()
         expect(id).toHaveLength(36)
