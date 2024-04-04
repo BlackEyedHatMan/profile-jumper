@@ -1,8 +1,8 @@
 {
-  "manifest_version": 2,
-  "name": "Profile Jumper! Jump easily between profiles!",
+  "manifest_version": 3,
+  "name": "Profile Jumper!",
   "short_name": "Profile Jumper!",
-  "description": "Extension to help you jump to any of your online profiles. Can be social or other. Configure instantly. Open source and free!",
+  "description": "Helps you jump easily between profiles. Have your profile links (or any other link) instantly in one place. See website for more info.",
   "version": "0.0.8",
   "author": "Mr Upgradable",
   "icons": {
@@ -13,9 +13,10 @@
     "128": "images/icon128.png",
     "192": "images/icon192.png"
   },
-  "browser_action": {
+  "action": {
     "default_icon": "images/icon192.png",
-    "default_popup": "index.html#popup"
+    "default_popup": "index.html#popup",
+    "default_title": "Profile Jumper! Jump easily between your profiles."
   },
   "options_page": "index.html#settings",
   "permissions": [
