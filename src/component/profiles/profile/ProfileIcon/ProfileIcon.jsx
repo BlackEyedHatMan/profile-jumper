@@ -5,6 +5,6 @@ import { LibraryIcon } from '../../../icon/LibraryIcon'
 
 import './ProfileIcon.css'
 
-export const ProfileIcon = ({ icon, color = DEFAULT_ICON_COLOUR }) => (
-    <LibraryIcon name={ icon } color={color} className="ProfileIcon" />
+export const ProfileIcon = ({ iconName, color = DEFAULT_ICON_COLOUR }) => (
+    <LibraryIcon iconName={ iconName } color={color} className="ProfileIcon" />
 )

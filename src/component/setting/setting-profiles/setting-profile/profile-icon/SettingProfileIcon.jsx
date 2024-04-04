@@ -22,7 +22,7 @@ export const SettingProfileIcon = ({ iconName, onColorChange, color = DEFAULT_IC
     return (
         <div className="SettingProfileIconWrapper">
             <ColorPicker visible={ showColorPicker } onColorChoose={ onColorChoose } defaultColor={ color } ref={ ref }/>
-            <LibraryIcon name={ iconName } color={ color } className="SettingProfileIcon" onClick={ toggleColorPicker }/>
+            <LibraryIcon iconName={ iconName } color={ color } className="SettingProfileIcon" onClick={ toggleColorPicker }/>
         </div>
     )
 }

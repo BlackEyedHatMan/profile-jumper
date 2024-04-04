@@ -1,17 +1,17 @@
 import React from 'react'
 
-import { capitalize } from '../../../utility/string/string-utility'
 import { ProfileIcon } from './ProfileIcon/ProfileIcon'
+import { normIconName } from '../../../utility/icon/icon-lib-utility'
 
 import './Profile.css'
 
 export const Profile = ({ profile }) => {
-    const linkTitle = profile.title || capitalize(profile.icon)
+    const linkTitle = profile.title || normIconName(profile.icon)
 
     return (
         <div className="Profile">
             <a href={ profile.url } title={ linkTitle } target="_blank" rel="noopener noreferrer">
-                <ProfileIcon icon={ profile.icon } color={ profile.iconColor }/>
+                <ProfileIcon iconName={ profile.icon } color={ profile.iconColor }/>
             </a>
         </div>
     )

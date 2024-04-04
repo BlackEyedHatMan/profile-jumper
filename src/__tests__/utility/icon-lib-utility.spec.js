@@ -10,6 +10,9 @@ describe('LibraryIcon Lib Utility', () => {
         iconLibraries.set('si', siIcons)
 
         const icon = findIconInLibraries('Google', iconLibraries)
+
+        expect(icon).toHaveProperty('name')
+        expect(icon).toHaveProperty('icon')
         expect(icon.name).toEqual('SiGoogle')
     })
 
@@ -83,10 +86,10 @@ describe('LibraryIcon Lib Utility', () => {
         iconLibraries.set('fa', faIcons)
 
         const googleIconName = findIconNameForUrl('https://google.com', iconLibraries)
-        expect(googleIconName).toEqual('Google')
+        expect(googleIconName).toEqual('SiGoogle')
 
         const metaIconName = findIconNameForUrl('https://meta.com', iconLibraries)
-        expect(metaIconName).toEqual('Meta')
+        expect(metaIconName).toEqual('SiMeta')
     })
 
     test('should find default icon name for non matching url name part', () => {
@@ -95,7 +98,7 @@ describe('LibraryIcon Lib Utility', () => {
         iconLibraries.set('fa', faIcons)
 
         const iconName = findIconNameForUrl('https://non-existent-icon.com', iconLibraries)
-        expect(iconName).toEqual('Link')
+        expect(iconName).toEqual('FaLink')
     })
 
     test('should find icon name for title', () => {
@@ -104,10 +107,10 @@ describe('LibraryIcon Lib Utility', () => {
         iconLibraries.set('fa', faIcons)
 
         const googleIconName = findIconNameTitle('Google', iconLibraries)
-        expect(googleIconName).toEqual('Google')
+        expect(googleIconName).toEqual('SiGoogle')
 
         const linkedInIconName = findIconNameTitle('linkedIn', iconLibraries)
-        expect(linkedInIconName).toEqual('Linkedin')
+        expect(linkedInIconName).toEqual('SiLinkedin')
     })
 
     test('should find default icon name for title which does not have icon', () => {
@@ -116,7 +119,7 @@ describe('LibraryIcon Lib Utility', () => {
         iconLibraries.set('fa', faIcons)
 
         const iconName = findIconNameTitle('Non-Existent-Icon', iconLibraries)
-        expect(iconName).toEqual('Link')
+        expect(iconName).toEqual('FaLink')
     })
 
     test('should find icon name for title nearest match', () => {
@@ -124,8 +127,8 @@ describe('LibraryIcon Lib Utility', () => {
         iconLibraries.set('si', siIcons)
         iconLibraries.set('fa', faIcons)
 
-        expect(findIconNameTitle('Goo', iconLibraries)).toEqual('Google')
-        expect(findIconNameTitle('Good', iconLibraries)).toEqual('Goodreads')
+        expect(findIconNameTitle('Goo', iconLibraries)).toEqual('SiGoogle')
+        expect(findIconNameTitle('Good', iconLibraries)).toEqual('SiGoodreads')
     })
 
     test('should find icon name for aliases as priority over icon library names', () => {
@@ -133,23 +136,23 @@ describe('LibraryIcon Lib Utility', () => {
         iconLibraries.set('si', siIcons)
         iconLibraries.set('fa', faIcons)
 
-        expect(findIconNameTitle('analytics', iconLibraries)).toEqual('ChartLine')
-        expect(findIconNameTitle('automata', iconLibraries)).toEqual('Pushed')
-        expect(findIconNameTitle('booking', iconLibraries)).toEqual('Hotel')
-        expect(findIconNameTitle('bank', iconLibraries)).toEqual('PiggyBank')
-        expect(findIconNameTitle('broker', iconLibraries)).toEqual('Handshake')
-        expect(findIconNameTitle('chrome webstore', iconLibraries)).toEqual('Chrome')
-        expect(findIconNameTitle('code', iconLibraries)).toEqual('LaptopCode')
-        expect(findIconNameTitle('company', iconLibraries)).toEqual('Building')
-        expect(findIconNameTitle('credit', iconLibraries)).toEqual('FileInvoiceDollar')
-        expect(findIconNameTitle('derivatives', iconLibraries)).toEqual('FileContract')
-        expect(findIconNameTitle('email', iconLibraries)).toEqual('Envelope')
-        expect(findIconNameTitle('finance', iconLibraries)).toEqual('ChartBar')
-        expect(findIconNameTitle('gov', iconLibraries)).toEqual('Archway')
-        expect(findIconNameTitle('news', iconLibraries)).toEqual('Newspaper')
-        expect(findIconNameTitle('study', iconLibraries)).toEqual('GraduationCap')
-        expect(findIconNameTitle('tfl', iconLibraries)).toEqual('Transportforlondon')
-        expect(findIconNameTitle('vpn', iconLibraries)).toEqual('UserShield')
+        expect(findIconNameTitle('analytics', iconLibraries)).toEqual('FaChartLine')
+        expect(findIconNameTitle('automata', iconLibraries)).toEqual('FaPushed')
+        expect(findIconNameTitle('booking', iconLibraries)).toEqual('FaHotel')
+        expect(findIconNameTitle('bank', iconLibraries)).toEqual('FaPiggyBank')
+        expect(findIconNameTitle('broker', iconLibraries)).toEqual('FaHandshake')
+        expect(findIconNameTitle('chrome webstore', iconLibraries)).toEqual('FaChrome')
+        expect(findIconNameTitle('code', iconLibraries)).toEqual('FaLaptopCode')
+        expect(findIconNameTitle('company', iconLibraries)).toEqual('FaBuilding')
+        expect(findIconNameTitle('credit', iconLibraries)).toEqual('FaFileInvoiceDollar')
+        expect(findIconNameTitle('derivatives', iconLibraries)).toEqual('FaFileContract')
+        expect(findIconNameTitle('email', iconLibraries)).toEqual('FaEnvelope')
+        expect(findIconNameTitle('finance', iconLibraries)).toEqual('FaChartBar')
+        expect(findIconNameTitle('gov', iconLibraries)).toEqual('FaArchway')
+        expect(findIconNameTitle('news', iconLibraries)).toEqual('FaNewspaper')
+        expect(findIconNameTitle('study', iconLibraries)).toEqual('FaGraduationCap')
+        expect(findIconNameTitle('tfl', iconLibraries)).toEqual('SiTransportforlondon')
+        expect(findIconNameTitle('vpn', iconLibraries)).toEqual('FaUserShield')
     })
 
 })

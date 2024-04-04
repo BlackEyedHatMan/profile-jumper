@@ -13,7 +13,7 @@ export const hasValue = (value) => {
     return value.trim().length !== 0;
 }
 
-export const contains = (value, sought) => {
+export const doesContain = (value, sought) => {
     if(!hasValue(value) || !hasValue(sought)) return false
     return normForCompare(value).includes(normForCompare(sought))
 }

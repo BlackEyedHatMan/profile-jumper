@@ -1,4 +1,4 @@
-import { contains, hasValue, isSame, normForCompare } from '../string/string-utility'
+import { doesContain, hasValue, isSame, normForCompare } from '../string/string-utility'
 import { DEFAULT_ICON_NAME, IconAliases, IconLibraries } from '../../config/IconLibraries'
 import { scrubUrlParts } from '../url/url-utility'
 
@@ -8,24 +8,46 @@ export const obtainExactIconInLibraries = (exactIconName, iconLibraries = IconLi
     const libKey = exactIconName.substring(0, 2).toLowerCase()
     const iconLib = iconLibraries.get(libKey)
     if (!iconLib) return ICON_NOT_FOUND
+    if (!iconLib) return ICON_NOT_FOUND
     return iconLib[exactIconName]
 }
 
 export const findIconInLibraries = (name, iconLibraries = IconLibraries) => {
     if (!hasValue(name)) return undefined
-    const soughtIconName = preferAliasedIcon(name)
+
+    const aliasedIcon = preferAliasedIcon(name)
+    if (aliasedIcon) return aliasedIcon
+
     const foundIcons = []
     for (const [key, lib] of iconLibraries.entries()) {
-        const iconsFound = findIconsInLibrary(soughtIconName, lib, key)
+        const iconsFound = findIconsInLibrary(name, lib, key)
         if (iconsFound) foundIcons.push(iconsFound)
     }
     foundIcons.sort(sizeSort)
-    return (foundIcons.length === 0) ? undefined : foundIcons[0][1]
+    return extractFirstIcon(foundIcons)
+}
+
+const extractFirstIcon = (icons) => {
+    if (!icons || icons.length === 0) return undefined
+    const [iconName, icon] = icons[0]
+    return iconResult(iconName, icon)
+}
+
+const iconResult = (iconName, icon) => {
+    return {
+        name: iconName,
+        icon: icon
+    }
 }
 
 const preferAliasedIcon = (name) => {
     const normedValue = normForCompare(name)
-    return (IconAliases.has(normedValue)) ? IconAliases.get(normedValue) : name
+    const aliasedIcon = (IconAliases.has(normedValue)) ? IconAliases.get(normedValue) : undefined
+    if (aliasedIcon) {
+        const exactIcon = obtainExactIconInLibraries(aliasedIcon)
+        return iconResult(aliasedIcon, exactIcon)
+    }
+    return undefined
 }
 
 const findIconsInLibrary = (name, iconLib, libKey) => {
@@ -34,7 +56,7 @@ const findIconsInLibrary = (name, iconLib, libKey) => {
     for (let libIconName of Object.keys(iconLib)) {
         const libIconNameNormed = normIconName(libIconName, libKeyLen)
         if (isSame(libIconNameNormed, name)) foundIcons.push([libIconName, iconLib[libIconName]])
-        if (contains(libIconNameNormed, name)) foundIcons.push([libIconName, iconLib[libIconName]])
+        if (doesContain(libIconNameNormed, name)) foundIcons.push([libIconName, iconLib[libIconName]])
     }
 
     if (!foundIcons || foundIcons.length === 0) return undefined
@@ -61,16 +83,14 @@ const sizeSort = (a, b) => {
 export const findIconNameForUrl = (url, iconLibraries = IconLibraries) => {
     const urlScrubbed = scrubUrlParts(url)
     const foundResult = findIconInLibraries(urlScrubbed, iconLibraries)
-    if (foundResult) return normIconName(foundResult.name)
-    return normIconName(DEFAULT_ICON_NAME)
+    return (!foundResult) ? DEFAULT_ICON_NAME : foundResult.name
 }
 
 export const findIconNameTitle = (title, iconLibraries = IconLibraries) => {
     const foundResult = findIconInLibraries(title, iconLibraries)
-    if (foundResult) return normIconName(foundResult.name)
-    return normIconName(DEFAULT_ICON_NAME)
+    return (!foundResult) ? DEFAULT_ICON_NAME : foundResult.name
 }
 
-const normIconName = (iconName, keyLen = 2) => {
+export const normIconName = (iconName, keyLen = 2) => {
     return iconName.substring(keyLen)
 }
