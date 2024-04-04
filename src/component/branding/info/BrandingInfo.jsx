@@ -18,7 +18,7 @@ export const BrandingInfo = () => (
                 <span className="BrandingInfoVersion">Version { APP_VERSION }</span>
             </h1>
             <p>Jump easily between your profiles.</p>
-            <p>Click the "gears" or right-click extension icon for "options" to update your profile links instantly.</p>
+            <p>Click the "gears" icon to update your links.</p>
         </div>
         <div className="ConfigureInfo">
             <a className="ConfigureClick" href="#settings" target="_blank" rel="noopener noreferrer" title="Click here to update your profile links - Profile Jumper!">

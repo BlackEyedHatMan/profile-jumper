@@ -19,7 +19,7 @@ export const SettingHeader = () => (
                    rel="noopener noreferrer"
                    title={ WEBSITE_LINK_ALT }>Profile Jumper!</a>
                 <span>Settings</span></h1>
-            <p>Enter your profile link URL & Title (icon will automatically change). Then click on the "+" button.</p>
+            <p>Enter your profile link URL & Title (icon will automatically change). Then click on the "+" button to add your profile.</p>
         </div>
     </div>
 )

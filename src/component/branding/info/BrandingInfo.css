@@ -8,7 +8,7 @@
 
 .BrandingInfo h1 {
     margin: 0;
-    font-size: 1em;
+    font-size: 11px;
     color: #367532;
 }
 
@@ -32,27 +32,27 @@
 
 .BrandingInfoVersion {
     color: #8f8f8f;
-    font-size: 0.8em;
+    font-size: 11px;
 }
 
 .BrandingInfo p {
     color: #8f8f8f;
-    font-size: 0.7em;
-    margin: 2px;
+    font-size: 10px;
+    margin: 2px 0;
 }
 
 .ConfigureInfo {
     display: inline-block;
     vertical-align: top;
-    padding-top: 10px;
+    padding-top: 4px;
     margin-right: 10px;
     width: 40px;
     text-align: right;
 }
 
 .ConfigureInfo svg {
-    width: 46px;
-    height: 46px;
+    width: 42px;
+    height: 42px;
 }
 
 .ConfigureClick {
