@@ -13,18 +13,22 @@ export const ColorPicker = React.forwardRef((props, ref ) => {
         '#DB3E00',
         '#FCCB00',
         '#008B02',
+        '#006B76',
         '#325d97',
         '#1273DE',
         '#004DCF',
         '#5300EB',
+        '#000000',
         '#EB9694',
         '#FAD0C3',
         '#FEF3BD',
         '#C1E1C5',
         '#BEDADC',
+        '#BCCDE5',
         '#C4DEF6',
         '#BED3F3',
         '#D4C4FB',
+        '#8C8C8C',
     ]
 
     const onChangeColor = (color) => {
@@ -40,6 +44,7 @@ export const ColorPicker = React.forwardRef((props, ref ) => {
                 placement="BL"
                 style={ {
                     '--github-background-color': '#ffffff',
+                    'width': '250px'
                 } }
                 onChange={ onChangeColor }
             /> }

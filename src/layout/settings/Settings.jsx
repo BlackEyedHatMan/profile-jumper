@@ -23,7 +23,7 @@ export const Settings = () => {
                     <div className="ProfilesPannel">
                         <Profiles/>
                     </div>
-                    <p>This is how your profiles will look.</p>
+                    <p>Your profile links will look like this.</p>
                     <div className="SettingsDataPanel">
                         <SettingsDataImport/>
                         <SettingsDataExport/>

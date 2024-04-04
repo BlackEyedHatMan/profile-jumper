@@ -14,6 +14,6 @@ export const FooterInfo = () => (
                title={ WEBSITE_LINK_ALT }>Profile Jumper!</a>
             <span className="BrandingInfoVersion">Version { APP_VERSION }</span>
         </h1>
-        <p>Jump easily between your profiles! <br/>Add or remove profiles - this will update your profile links instantly.</p>
+        <p>Jump easily between your profiles. <br/>Add or remove profiles - this will update your profile links instantly.</p>
     </div>
 )

@@ -17,7 +17,7 @@ export const BrandingInfo = () => (
                    title={ WEBSITE_LINK_ALT }>Profile Jumper!</a>
                 <span className="BrandingInfoVersion">Version { APP_VERSION }</span>
             </h1>
-            <p>Jump easily between your profiles!</p>
+            <p>Jump easily between your profiles.</p>
             <p>Click the "gears" or right-click extension icon for "options" to update your profile links instantly.</p>
         </div>
         <div className="ConfigureInfo">
