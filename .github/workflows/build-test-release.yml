@@ -118,3 +118,20 @@ jobs:
           asset_path: ${{ steps.release-asset-vars.outputs.RELEASE_ASSET_PATH }}
           asset_name: ${{ steps.release-asset-vars.outputs.RELEASE_ASSET }}
           asset_content_type: application/zip
+      - name: upload release artifact for publishing
+        uses: actions/upload-artifact@v4
+        with:
+          name: publish-artifact
+          path: ${{ steps.release-asset-vars.outputs.RELEASE_ASSET_PATH }}
+
+  perform_publish:
+    needs: [perform_release]
+    runs-on: ubuntu-latest
+    steps:
+      - name: download release artifact for publishing
+        uses: actions/download-artifact@v4
+        with:
+          name: publish-artifact
+      - name: show artifacts
+        run: |
+          run: ls -R
