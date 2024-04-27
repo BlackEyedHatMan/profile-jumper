@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Profile Jumper!",
   "short_name": "Profile Jumper!",
-  "description": "Helps you jump easily between profiles. Have your profile links (or any other link) instantly in one place. See website for more info.",
+  "description": "Helps you jump easily between profiles. Have your profile links (or any link) instantly in one place. See website for more info.",
   "version": "0.0.9",
   "author": "Mr Upgradable",
   "icons": {
