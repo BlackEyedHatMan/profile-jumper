@@ -134,4 +134,4 @@ jobs:
           name: publish-artifact
       - name: list artifacts
         run: |
-          run: ls -R
+          ls -R
