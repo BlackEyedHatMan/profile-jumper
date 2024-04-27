@@ -1,0 +1,120 @@
+name: Build + Test & Tag
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  collect_vars:
+    runs-on: ubuntu-latest
+    outputs:
+      COMMIT_MESSAGE: ${{ steps.get-commit-message.outputs.COMMIT_MESSAGE }}
+      RELEASE_VERSION: ${{ steps.get-release-version.outputs.RELEASE_VERSION }}
+      TAG_VERSION: ${{ steps.get-tag-version.outputs.TAG_VERSION }}
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: get-commit-message
+        name: collect commit message
+        run: |
+          echo "COMMIT_MESSAGE=$(git show -s --format=%s)" >> "$GITHUB_OUTPUT"
+      - id: get-release-version
+        name: extract accessible release
+        env:
+          COMMIT_MESSAGE: ${{ steps.get-commit-message.outputs.COMMIT_MESSAGE }}
+        run: |
+          RELEASE_COMMIT_PART=$(echo $COMMIT_MESSAGE | awk '{for(i=1;i<=NF;i++) if(tolower($i) ~ /release:[0-9]+\.[0-9]+\.[0-9]+/) print tolower($i)}')
+          if [ "${#RELEASE_COMMIT_PART}" -ge 3 ] 
+          then
+            echo "RELEASE_VERSION=${RELEASE_COMMIT_PART#release:}" >> "$GITHUB_OUTPUT"
+          fi
+      - id: get-tag-version
+        name: collect last tag version
+        run: |
+          LATEST_TAG=$(git tag --sort=-taggerdate | head -1)
+          if [ "${#LATEST_TAG}" -ge 3 ]
+          then
+            echo "TAG_VERSION=$LATEST_TAG" >> "$GITHUB_OUTPUT"
+          fi
+
+  build_and_test:
+    needs: [collect_vars]
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: install dependencies
+        run: npm install
+      - name: build node app
+        run: npm run build
+      - name: test node app
+        run: npm test
+
+  should_tag:
+    needs: [build_and_test, collect_vars]
+    runs-on: ubuntu-latest
+    env:
+      COMMIT_MESSAGE: ${{ needs.collect_vars.outputs.COMMIT_MESSAGE }}
+      RELEASE_VERSION: ${{ needs.collect_vars.outputs.RELEASE_VERSION }}
+      TAG_VERSION: ${{ needs.collect_vars.outputs.TAG_VERSION }}
+    outputs:
+      SHOULD_TAG: ${{ steps.determine-should-tag.outputs.SHOULD_TAG }}
+    steps:
+      - id: determine-should-tag
+        name: determine whether to tag
+        run: |
+          SHOULD_TAG=false
+          if [ -z ${TAG_VERSION} ] && [ "${#RELEASE_VERSION}" -ge 3 ]; then
+            echo "SHOULD_TAG=true" >> "$GITHUB_OUTPUT"
+          elif [ "${#RELEASE_VERSION}" -ge 3 ] && [ "${#TAG_VERSION}" -ge 3 ] && [ $TAG_VERSION != $RELEASE_VERSION ] && [ $RELEASE_VERSION == $(printf "%s\n%s\n" "$RELEASE_VERSION" "$TAG_VERSION" | sort -V | tail -n 1) ]; then
+            echo "SHOULD_TAG=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  perform_release:
+    needs: [should_tag, collect_vars]
+    runs-on: ubuntu-latest
+    if: ${{ needs.should_tag.outputs.SHOULD_TAG }}
+    env:
+      RELEASE_VERSION: ${{ needs.collect_vars.outputs.RELEASE_VERSION }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: install dependencies
+        run: npm install
+      - name: build node app
+        run: npm run build
+      - name: create app archive
+        run: npm run build:archive
+      - id: create-release
+        name: create release
+        uses: actions/create-release@v1.1.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.RELEASE_VERSION }}
+          release_name: Release ${{ env.RELEASE_VERSION }}
+      - id: release-asset-vars
+        name: build release asset vars
+        run: |
+          echo "RELEASE_ASSET=profile-jumper-${RELEASE_VERSION}.zip" >> "$GITHUB_OUTPUT"
+          echo "RELEASE_ASSET_PATH=./deploy/profile-jumper-${RELEASE_VERSION}.zip" >> "$GITHUB_OUTPUT"
+      - name: upload release app asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: ${{ steps.release-asset-vars.outputs.RELEASE_ASSET_PATH }}
+          asset_name: ${{ steps.release-asset-vars.outputs.RELEASE_ASSET }}
+          asset_content_type: application/zip

@@ -127,7 +127,7 @@ describe('LibraryIcon Lib Utility', () => {
         iconLibraries.set('si', siIcons)
         iconLibraries.set('fa', faIcons)
 
-        expect(findIconNameTitle('Goo', iconLibraries)).toEqual('SiGoogle')
+        expect(findIconNameTitle('Goog', iconLibraries)).toEqual('SiGoogle')
         expect(findIconNameTitle('Good', iconLibraries)).toEqual('SiGoodreads')
     })
 
