@@ -125,13 +125,22 @@ jobs:
           path: ${{ steps.release-asset-vars.outputs.RELEASE_ASSET_PATH }}
 
   perform_publish:
-    needs: [perform_release]
+    needs: [perform_release, collect_vars]
     runs-on: ubuntu-latest
     steps:
       - name: download release artifact for publishing
         uses: actions/download-artifact@v4
         with:
           name: publish-artifact
-      - name: list artifacts
+      - id: release-asset-vars
+        name: reference release asset file
         run: |
-          ls -R
+          echo "RELEASE_ASSET_ARCHIVE=profile-jumper-${RELEASE_VERSION}.zip" >> "$GITHUB_OUTPUT"
+      - name: publish release artifact to chrome webstore
+        uses: cardinalby/webext-buildtools-chrome-webstore-action@v1
+        with:
+          zipFilePath: ${{ steps.release-asset-vars.outputs.RELEASE_ASSET_ARCHIVE }}
+          extensionId: ${{ secrets.CHROME_EXTENSION_ID }}
+          apiClientId: ${{ secrets.G_CLIENT_ID }}
+          apiClientSecret: ${{ secrets.G_CLIENT_SECRET }}
+          apiRefreshToken: ${{ secrets.G_REFRESH_TOKEN }}
