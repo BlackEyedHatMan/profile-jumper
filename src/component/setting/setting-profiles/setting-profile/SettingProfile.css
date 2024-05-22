@@ -21,3 +21,7 @@
     background-color: #a9eaa9;
     border-color: #7cd37c;
 }
+
+::placeholder {
+    color: #c4c4c4;
+}
