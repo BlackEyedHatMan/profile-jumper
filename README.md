@@ -1,4 +1,4 @@
-# [Profile Jumper!](https://profilejumper.com) ![Build Status](https://github.com/mrupgradable/profile-jumper/actions/workflows/build-and-test.yml/badge.svg?branch=build-and-tag)
+# [Profile Jumper!](https://profilejumper.com?utm_source=github&utm_medium=product&utm_campaign=github-project-extension) ![Build Status](https://github.com/mrupgradable/profile-jumper/actions/workflows/build-and-test.yml/badge.svg?branch=build-and-tag)
 Jump easily between your profiles.
 
 ## Chrome Browser Extension
@@ -12,7 +12,7 @@ You can use this for any link (it does not only need to be for a social profile)
 See [Chrome Browser Extension](https://chromewebstore.google.com/detail/profile-jumper/fgjjcaimpepmohgbbeaooecldlknlkef) in the Chrome Web Store.
 
 Need more info on how to use?
-See [Profile Jumper!](https://profilejumper.com) website.
+See [Profile Jumper!](https://profilejumper.com?utm_source=github&utm_medium=product&utm_campaign=github-project-extension) website.
 
 ## Demo
 This is how you can have different social media profile links. 

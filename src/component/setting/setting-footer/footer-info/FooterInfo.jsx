@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { APP_VERSION, WEBSITE_LINK, WEBSITE_LINK_ALT } from '../../../../config/constants.js'
+import { APP_VERSION, WEBSITE_HOW_TO_USE_LINK_SETTINGS, WEBSITE_LINK_ALT } from '../../../../config/constants.js'
 
 import './FooterInfo.css'
 
 export const FooterInfo = () => (
     <div className="FooterInfo">
         <h1>
-            <a href={ WEBSITE_LINK }
+            <a href={ WEBSITE_HOW_TO_USE_LINK_SETTINGS }
                className="BrandingLink"
                target="_blank"
                rel="noopener noreferrer"
