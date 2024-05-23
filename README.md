@@ -34,5 +34,5 @@ Sure, just a _"Thank You"_ would be nice! (No need to send money or buy coffee).
 Hashtag **#ProfileJumper** with Thanks! (or any other choice words) and this would make me most happy & grateful. Knowing that someone else finds this useful is happiness squared. 
 
 ## Privacy
-Just a word on privacy, no personal data, links or anything else is captured or recorded.
+Just a word on privacy, none of your personal data, your profile links or anything else is captured or recorded.
 This too is confirmed on the Profile Jumper! Website and Chrome Web Store (see Privacy sections).
