@@ -1,0 +1,19 @@
+.blockTimeContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.timeInput {
+    padding: 5px;
+    border: 1px solid #c4c4c4;
+    border-radius: 3px;
+    width: 80px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.timeLabel {
+    font-size: 14px;
+    color: #333;
+}

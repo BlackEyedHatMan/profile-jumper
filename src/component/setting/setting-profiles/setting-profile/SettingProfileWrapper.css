@@ -1,0 +1,24 @@
+.SettingProfileWrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 4px 1px;
+}
+
+.SettingProfileWrapper .SettingProfile {
+    flex: 1;
+    margin-right: 2px;
+}
+
+.SettingProfileWrapper .BlockIconContainer {
+    position: static;
+    transform: none;
+    margin-left: 5px;
+    flex-shrink: 0;
+}
+
+.SettingProfileWrapper .spacer-element {
+    width: 35px;
+    margin-left: 8px;
+    flex-shrink: 0;
+}

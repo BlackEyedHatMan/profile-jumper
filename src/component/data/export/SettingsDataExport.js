@@ -29,11 +29,12 @@ export const SettingsDataExport = () => {
     }
 
     const cleanOutputFileData = (profiles) => {
-        return profiles.map(profile => {
-            const exportProfile = profile
-            delete exportProfile.id // remove id
-            return exportProfile
-        })
+        return (profiles || []).map(profile => {
+            if (!profile) return {};
+            const exportProfile = {...profile};
+            delete exportProfile.id; // remove id
+            return exportProfile;
+        });
     }
 
     const enableDisableExport = (!profiles || profiles.length > 0) ? {} : { disabled: "disabled" }

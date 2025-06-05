@@ -1,6 +1,7 @@
 export const APP_VERSION = process.env.REACT_APP_VERSION
 
 export const DEFAULT_ICON_COLOUR = '#325d97'
+export const BLOCKED_ICON_COLOUR = 'rgba(128, 128, 128, 0.5)'
 
 export const WEBSITE_LINK_LOGO = "https://profilejumper.com?utm_source=profile-jumper&utm_medium=product&utm_campaign=logo"
 export const WEBSITE_LINK_SETTINGS = "https://profilejumper.com?utm_source=profile-jumper&utm_medium=product&utm_campaign=settings"

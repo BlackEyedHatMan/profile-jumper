@@ -8,6 +8,7 @@ import { Profiles } from '../../component/profiles/Profiles'
 
 import { SettingsDataImport } from '../../component/data/import/SettingsDataImport'
 import { SettingsDataExport } from '../../component/data/export/SettingsDataExport'
+import ErrorBoundary from '../../components/ErrorBoundary'
 
 import './Settings.css'
 
@@ -21,16 +22,24 @@ export const Settings = () => {
             <div className="SettingsConfig">
                 <div className="ProfilesPannelWapper">
                     <div className="ProfilesPannel">
-                        <Profiles/>
+                        <ErrorBoundary>
+                            <Profiles/>
+                        </ErrorBoundary>
                     </div>
                     <p>Your profile links will look like the above.</p>
                     <div className="SettingsDataPanel">
-                        <SettingsDataImport/>
-                        <SettingsDataExport/>
+                        <ErrorBoundary>
+                            <SettingsDataImport/>
+                        </ErrorBoundary>
+                        <ErrorBoundary>
+                            <SettingsDataExport/>
+                        </ErrorBoundary>
                     </div>
                 </div>
                 <div className="SettingsPannel">
-                    <SettingProfiles/>
+                    <ErrorBoundary>
+                        <SettingProfiles/>
+                    </ErrorBoundary>
                 </div>
             </div>
 

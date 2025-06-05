@@ -3,7 +3,6 @@
     background-color: #f1f1f1;
     border: 1px solid #c4c4c4;
     border-radius: 3px;
-    margin: 4px 1px;
     padding: 2px 10px;
 }
 
@@ -15,6 +14,7 @@
 
 .Updating {
     background-color: #fffbb8;
+    position: relative;
 }
 
 .Dragging {

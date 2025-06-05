@@ -16,8 +16,16 @@ export const SettingProfiles = () => {
 
     const onProfileUpdate = (profile) => {
         const index = profiles.findIndex((p) => p.id === profile.id)
-        const copyProfiles = [...profiles]
+
+        // Create a deep copy of the profiles array
+        const copyProfiles = JSON.parse(JSON.stringify(profiles))
+
+
+        // Update the profile at the specific index
         copyProfiles[index] = profile
+
+
+        // Update the state with the new profiles array
         setProfiles(copyProfiles)
     }
 

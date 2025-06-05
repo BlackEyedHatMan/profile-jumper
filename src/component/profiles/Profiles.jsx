@@ -25,7 +25,7 @@ export const Profiles = () => {
     if (profiles && profiles.length > 0) {
         profilesListed = (
             <div className="Profiles">
-                { profiles.map(profile => (
+                { (profiles || []).map(profile => (
                     <Profile key={ profile.id } id={ profile.id } profile={ profile }/>
                 )) }
             </div>
