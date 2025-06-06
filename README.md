@@ -29,9 +29,15 @@ When you click on a profile link - it opens a new window.
 * I wanted something that could have different links for different browser profiles (personal vs business)
 
 ## Want to say Thank You?
-Sure, just a _"Thank You"_ would be nice! (No need to send money or buy coffee).
+Sure, a _"Thank You"_ would be nice!
 
 Hashtag **#ProfileJumper** with Thanks! (or any other choice words) and this would make me most happy & grateful. Knowing that someone else finds this useful is happiness squared. 
+
+Support this project by keeping it free
+
+<a href="https://coff.ee/profilejumper">
+<img src="artwork/support/by-me-a-coffee.png" alt="Buy me a coffee" width="200">
+</a>
 
 ## Privacy
 Just a word on privacy, none of your personal data, your profile links or anything else is captured or recorded.
