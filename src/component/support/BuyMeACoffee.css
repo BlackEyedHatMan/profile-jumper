@@ -1,0 +1,35 @@
+.BuyMeACoffee {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.BuyMeACoffee a {
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.BuyMeACoffee a:hover {
+  transform: scale(1.05);
+}
+
+.BuyMeACoffee img {
+  display: block;
+}
+
+.CoffeeCup {
+  width: 30px;
+  height: auto;
+  animation: shakeWithPause 1.7s infinite;
+}
+
+@keyframes shakeWithPause {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(5px, 2px) rotate(5deg); }
+  20% { transform: translate(-5px, -2px) rotate(-5deg); }
+  30% { transform: translate(3px, 1px) rotate(3deg); }
+  33.33% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}

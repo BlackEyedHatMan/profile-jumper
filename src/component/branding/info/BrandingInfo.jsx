@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { DisplayIcon } from '../../icon/DisplayIcon'
+import { BuyMeACoffee } from '../../support/BuyMeACoffee'
 
 import { APP_VERSION, WEBSITE_HOW_TO_USE_LINK_POPUP, WEBSITE_LINK_ALT } from '../../../config/constants.js'
 
@@ -19,6 +20,9 @@ export const BrandingInfo = () => (
             </h1>
             <p>Jump easily between your profiles.</p>
             <p>Click the "gears" icon to update your links.</p>
+        </div>
+        <div className="Support">
+            <BuyMeACoffee />
         </div>
         <div className="ConfigureInfo">
             <a className="ConfigureClick" href="#settings" target="_blank" rel="noopener noreferrer" title="Click here to update your profile links - Profile Jumper!">

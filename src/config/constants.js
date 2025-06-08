@@ -10,3 +10,5 @@ export const WEBSITE_LINK_ALT = "Profile Jumper! - See website for more info"
 export const WEBSITE_HOW_TO_USE_LINK_POPUP = "https://profilejumper.com/how-to-use?utm_source=profile-jumper&utm_medium=product&utm_campaign=popup"
 export const WEBSITE_HOW_TO_USE_LINK_SETTINGS = "https://profilejumper.com/how-to-use?utm_source=profile-jumper&utm_medium=product&utm_campaign=settings"
 export const WEBSITE_HOW_TO_USE_LINK_SETTINGS_DISPLAY = "https://profilejumper.com/how-to-use"
+
+export const BUY_ME_A_COFFEE_LINK = "https://www.buymeacoffee.com/profilejumper"
