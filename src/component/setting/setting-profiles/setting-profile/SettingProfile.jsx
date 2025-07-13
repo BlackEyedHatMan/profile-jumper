@@ -104,7 +104,8 @@ export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onPr
             (blockData !== null && !editProfileData.block) ||
             (blockData !== null && editProfileData.block && 
              (blockData.startTime !== editProfileData.block.startTime || 
-              blockData.endTime !== editProfileData.block.endTime))
+              blockData.endTime !== editProfileData.block.endTime ||
+              JSON.stringify(blockData.selectedDays) !== JSON.stringify(editProfileData.block.selectedDays)))
 
         setEditProfileData(epd => {
             if (blockData === null) {

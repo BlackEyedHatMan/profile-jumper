@@ -1,0 +1,36 @@
+.day-selector {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    margin: 0 8px;
+}
+
+.day-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid #7e0000;
+    background-color: white;
+    color: #7e0000;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.day-circle:hover {
+    background-color: #f0f0f0;
+}
+
+.day-circle.selected {
+    background-color: #7e0000;
+    color: white;
+}
+
+.day-circle.selected:hover {
+    background-color: #6b0000;
+}
