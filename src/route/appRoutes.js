@@ -4,7 +4,6 @@ import { createHashRouter } from 'react-router-dom'
 
 import { Popup } from '../layout/popup/Popup'
 import { Settings } from '../layout/settings/Settings'
-import { Blocked } from '../layout/blocked/Blocked'
 
 export const appRoutes = createHashRouter([
     {
@@ -18,9 +17,5 @@ export const appRoutes = createHashRouter([
     {
         path: "/settings",
         element: <Settings/>
-    },
-    {
-        path: "/blocked",
-        element: <Blocked/>
     }
 ])

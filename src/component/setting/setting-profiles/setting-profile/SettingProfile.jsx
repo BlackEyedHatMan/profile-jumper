@@ -10,18 +10,12 @@ import { isEntityEmpty } from '../../../../utility/entity/entity-utility'
 import { mapProfileToData, mapValuesToProfile, resetProfileData } from '../../../../data/mapper/profile-data-mapper'
 import { ProfileHandle } from './profile-handle/ProfileHandle'
 import { findIconNameForUrl, findIconNameTitle } from '../../../../utility/icon/icon-lib-utility'
-import { BlockIcon } from './profile-block/BlockIcon'
-import { BlockSetting } from './profile-block/BlockSetting'
 
 import './SettingProfile.css'
-import './SettingProfileWrapper.css'
-import './SettingProfileRow.css'
 
 export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onProfileUpdate, primaryInput, isDragging }) => {
     const [editProfileData, setEditProfileData] = useState(mapProfileToData(profile))
     const [updated, setUpdated] = useState(false)
-    const [showBlockSetting, setShowBlockSetting] = useState(false)
-    const [isEditingBlock, setIsEditingBlock] = useState(false)
 
     const { register, watch, reset, formState: { errors }, handleSubmit } = useForm({
         mode: 'onChange',
@@ -51,13 +45,13 @@ export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onPr
                 const profileToUpdate = mapValuesToProfile(editProfileData)
                 onProfileUpdate(profileToUpdate)
                 setUpdated(false)
-            }, isEditingBlock ? 0 : 2000) // Apply immediately when in editing mode, otherwise debounce
+            }, 2000)
 
             return () => {
                 clearTimeout(updateTimer)
             }
         }
-    }, [updated, editProfileData, onProfileUpdate, isEditingBlock])
+    }, [updated, editProfileData, onProfileUpdate])
 
 
     const isValid = isEntityEmpty(errors)
@@ -85,80 +79,21 @@ export const SettingProfile = ({ profile, onProfileCreate, onProfileRemove, onPr
         })
     }
 
-    const handleBlockToggle = () => {
-        const willShow = !showBlockSetting
-
-        setShowBlockSetting(willShow)
-
-        if (willShow) {
-            setIsEditingBlock(true)
-        } else {
-            setIsEditingBlock(false)
-            setUpdated(true)
-        }
-    }
-
-    const handleBlockSettingChange = (blockData) => {
-        const isSignificantChange = 
-            (blockData === null && editProfileData.block) || 
-            (blockData !== null && !editProfileData.block) ||
-            (blockData !== null && editProfileData.block && 
-             (blockData.startTime !== editProfileData.block.startTime || 
-              blockData.endTime !== editProfileData.block.endTime ||
-              JSON.stringify(blockData.selectedDays) !== JSON.stringify(editProfileData.block.selectedDays)))
-
-        setEditProfileData(epd => {
-            if (blockData === null) {
-                const { block, ...restData } = epd
-                return restData
-            }
-
-            return { ...epd, block: blockData }
-        })
-
-        if (isSignificantChange) {
-            setUpdated(true)
-        }
-
-        setShowBlockSetting(true)
-        setIsEditingBlock(true)
-    }
-
     let className = 'SettingProfile'
     if (primaryInput) className += ' PrimaryInput'
     if (onProfileUpdate && updated) className += ' Updating'
     if (isDragging) className += ' Dragging'
 
     return (
-        <div className='SettingProfileWrapper'>
-            <div className='SettingProfileRow'>
-                <div className={ className }>
-                    { !primaryInput && <ProfileHandle/> }
+        <div className={ className }>
+            { !primaryInput && <ProfileHandle/> }
 
-                    <ProfileUrl register={ register } errors={ errors }/>
-                    <ProfileTitle register={ register } errors={ errors }/>
-                    <SettingProfileIcon iconName={ editProfileData.profileIcon } onColorChange={ onIconColorChange } color={ editProfileData?.profileIconColor } block={ editProfileData?.block }/>
+            <ProfileUrl register={ register } errors={ errors }/>
+            <ProfileTitle register={ register } errors={ errors }/>
+            <SettingProfileIcon iconName={ editProfileData.profileIcon } onColorChange={ onIconColorChange } color={ editProfileData?.profileIconColor }/>
 
-                    { onProfileCreate && <ProfileAdd onCreate={ onProfileAddHandler } enabled={ isValid }/> }
-                    { onProfileRemove && <ProfileRemove onRemove={ onProfileRemove }/> }
-                </div>
-
-                { !primaryInput ? (
-                    <BlockIcon 
-                        onBlock={handleBlockToggle} 
-                        blockData={editProfileData.block}
-                    />
-                ) : (
-                    <div className="spacer-element"></div>
-                )}
-            </div>
-
-            { showBlockSetting && !primaryInput &&
-                <BlockSetting 
-                    onBlockSettingChange={handleBlockSettingChange} 
-                    initialBlockData={editProfileData.block || null}
-                /> 
-            }
+            { onProfileCreate && <ProfileAdd onCreate={ onProfileAddHandler } enabled={ isValid }/> }
+            { onProfileRemove && <ProfileRemove onRemove={ onProfileRemove }/> }
         </div>
     )
 }

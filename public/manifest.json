@@ -18,14 +18,8 @@
     "default_popup": "index.html#popup",
     "default_title": "Profile Jumper! Jump easily between your profiles."
   },
-  "background": {
-    "service_worker": "background.js"
-  },
   "options_page": "index.html#settings",
   "permissions": [
-    "storage",
-    "tabs",
-    "webNavigation",
-    "activeTab"
+    "storage"
   ]
 }

@@ -5,6 +5,12 @@ import { useDataContext } from '../../context/DataContext'
 
 const profilesAtom = atom([])
 
+// drops the block field left behind by the removed screen block feature
+const stripLegacyBlockField = (profiles) => {
+    if (!profiles.some(profile => profile && 'block' in profile)) return profiles
+    return profiles.map(({ block, ...profile }) => profile)
+}
+
 export const useProfiles = () => {
     const profiles = useAtomValue(profilesAtom, {
         store: useDataContext()
@@ -19,14 +25,22 @@ export const useProfiles = () => {
                 if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
                     const result = await chrome.storage.local.get(['profiles']);
                     const storedProfiles = result.profiles || [];
-                    setProfiles(storedProfiles);
+                    const profiles = stripLegacyBlockField(storedProfiles);
+                    setProfiles(profiles);
+                    if (profiles !== storedProfiles) {
+                        await chrome.storage.local.set({ profiles });
+                    }
                 } else {
                     const storedData = localStorage.getItem('profiles');
                     if (storedData) {
                         try {
                             const parsed = JSON.parse(storedData);
-                            const profiles = Array.isArray(parsed) ? parsed : [];
+                            const storedProfiles = Array.isArray(parsed) ? parsed : [];
+                            const profiles = stripLegacyBlockField(storedProfiles);
                             setProfiles(profiles);
+                            if (profiles !== storedProfiles) {
+                                localStorage.setItem('profiles', JSON.stringify(profiles));
+                            }
                         } catch (e) {
                             console.error('Error parsing data from localStorage:', e);
                             setProfiles([]);

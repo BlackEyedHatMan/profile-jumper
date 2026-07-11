@@ -6,27 +6,13 @@ export const mapProfileToData = (profile) => {
         profileUrl: profile?.url,
         profileTitle: profile?.title,
         profileIcon: profile?.icon,
-        profileIconColor: profile?.iconColor,
-        block: profile?.block || null
+        profileIconColor: profile?.iconColor
     }
 }
 
 export const mapValuesToProfile = (data) => {
     const id = data.id || generateUniqueId()
-
-    const profile = {
-        id: id, 
-        url: data.profileUrl, 
-        title: data.profileTitle, 
-        icon: data.profileIcon, 
-        iconColor: data.profileIconColor
-    }
-
-    if (data.hasOwnProperty('block')) {
-        profile.block = data.block;
-    }
-
-    return profile;
+    return { id: id, url: data.profileUrl, title: data.profileTitle, icon: data.profileIcon, iconColor: data.profileIconColor }
 }
 
 export const resetProfileData = () => {
@@ -35,8 +21,6 @@ export const resetProfileData = () => {
         profileUrl: '',
         profileTitle: '',
         profileIcon: '',
-        profileColor: '',
-        block: null
+        profileColor: ''
     }
 }
-
