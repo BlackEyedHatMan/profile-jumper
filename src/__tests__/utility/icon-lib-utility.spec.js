@@ -109,8 +109,9 @@ describe('LibraryIcon Lib Utility', () => {
         const googleIconName = findIconNameTitle('Google', iconLibraries)
         expect(googleIconName).toEqual('SiGoogle')
 
+        // SiLinkedin was removed from simple-icons (trademark), so the fa library provides it
         const linkedInIconName = findIconNameTitle('linkedIn', iconLibraries)
-        expect(linkedInIconName).toEqual('SiLinkedin')
+        expect(linkedInIconName).toEqual('FaLinkedin')
     })
 
     test('should find default icon name for title which does not have icon', () => {

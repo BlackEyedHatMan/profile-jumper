@@ -1,4 +1,4 @@
-import { doesContain, hasValue, isSame, normForCompare } from '../string/string-utility'
+import { doesContain, hasValue, normForCompare } from '../string/string-utility'
 import { DEFAULT_ICON_NAME, IconAliases, IconLibraries } from '../../config/IconLibraries'
 import { scrubUrlParts } from '../url/url-utility'
 
@@ -7,7 +7,6 @@ export const obtainExactIconInLibraries = (exactIconName, iconLibraries = IconLi
     if (!hasValue(exactIconName)) return ICON_NOT_FOUND
     const libKey = exactIconName.substring(0, 2).toLowerCase()
     const iconLib = iconLibraries.get(libKey)
-    if (!iconLib) return ICON_NOT_FOUND
     if (!iconLib) return ICON_NOT_FOUND
     return iconLib[exactIconName]
 }
@@ -18,19 +17,14 @@ export const findIconInLibraries = (name, iconLibraries = IconLibraries) => {
     const aliasedIcon = preferAliasedIcon(name)
     if (aliasedIcon) return aliasedIcon
 
-    const foundIcons = []
-    for (const [key, lib] of iconLibraries.entries()) {
-        const iconsFound = findIconsInLibrary(name, lib, key)
-        if (iconsFound) foundIcons.push(iconsFound)
-    }
-    foundIcons.sort(sizeSort)
-    return extractFirstIcon(foundIcons)
-}
+    const candidates = collectMatchingIcons(name, iconLibraries)
+    if (candidates.length === 0) return undefined
 
-const extractFirstIcon = (icons) => {
-    if (!icons || icons.length === 0) return undefined
-    const [iconName, icon] = icons[0]
-    return iconResult(iconName, icon)
+    const sought = normForCompare(name)
+    candidates.sort((a, b) => compareIconRelevance(a, b, sought))
+
+    const best = candidates[0]
+    return iconResult(best.name, best.icon)
 }
 
 const iconResult = (iconName, icon) => {
@@ -41,43 +35,34 @@ const iconResult = (iconName, icon) => {
 }
 
 const preferAliasedIcon = (name) => {
-    const normedValue = normForCompare(name)
-    const aliasedIcon = (IconAliases.has(normedValue)) ? IconAliases.get(normedValue) : undefined
-    if (aliasedIcon) {
-        const exactIcon = obtainExactIconInLibraries(aliasedIcon)
-        return iconResult(aliasedIcon, exactIcon)
+    const aliasedIcon = IconAliases.get(normForCompare(name))
+    if (!aliasedIcon) return undefined
+    return iconResult(aliasedIcon, obtainExactIconInLibraries(aliasedIcon))
+}
+
+// candidates keep library insertion order, so the sort's stability
+// preserves library priority between equally relevant matches
+const collectMatchingIcons = (name, iconLibraries) => {
+    const candidates = []
+    for (const [libKey, iconLib] of iconLibraries.entries()) {
+        for (const libIconName of Object.keys(iconLib)) {
+            const matchName = normForCompare(normIconName(libIconName, libKey.length))
+            if (doesContain(matchName, name)) {
+                candidates.push({ name: libIconName, icon: iconLib[libIconName], matchName })
+            }
+        }
     }
-    return undefined
+    return candidates
 }
 
-const findIconsInLibrary = (name, iconLib, libKey) => {
-    const libKeyLen = libKey.length
-    const foundIcons = []
-    for (let libIconName of Object.keys(iconLib)) {
-        const libIconNameNormed = normIconName(libIconName, libKeyLen)
-        if (isSame(libIconNameNormed, name)) foundIcons.push([libIconName, iconLib[libIconName]])
-        if (doesContain(libIconNameNormed, name)) foundIcons.push([libIconName, iconLib[libIconName]])
+// exact match, then prefix match, then any containing match; shortest name wins within a rank
+const compareIconRelevance = (a, b, sought) => {
+    const rank = (candidate) => {
+        if (candidate.matchName === sought) return 0
+        if (candidate.matchName.startsWith(sought)) return 1
+        return 2
     }
-
-    if (!foundIcons || foundIcons.length === 0) return undefined
-
-    foundIcons.sort((a, b) => relevanceSort(a, b, name))
-    foundIcons.sort(sizeSort)
-
-    return foundIcons[0]
-}
-
-const relevanceSort = (a, b, name) => {
-    const normedA = a[0]
-    const normedB = b[0]
-    if (normedA.startsWith(name)) return -1
-    if (normedB.startsWith(name)) return 1
-}
-
-const sizeSort = (a, b) => {
-    const normedA = a[0]
-    const normedB = b[0]
-    return normedA.length - normedB.length
+    return (rank(a) - rank(b)) || (a.matchName.length - b.matchName.length)
 }
 
 export const findIconNameForUrl = (url, iconLibraries = IconLibraries) => {
