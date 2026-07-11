@@ -22,6 +22,7 @@
 
 # package
 package-lock.json
+devbox.lock
 
 npm-debug.log*
 yarn-debug.log*
