@@ -1,4 +1,4 @@
-# [Profile Jumper!](https://profilejumper.com?utm_source=github&utm_medium=product&utm_campaign=github-project-extension) ![Build Status](https://github.com/mrupgradable/profile-jumper/actions/workflows/build-and-test.yml/badge.svg?branch=build-and-tag)
+# [Profile Jumper!](https://profilejumper.com?utm_source=github&utm_medium=product&utm_campaign=github-project-extension) ![Build Status](https://github.com/BlackEyedHatMan/profile-jumper/actions/workflows/build-and-test.yml/badge.svg?branch=build-and-tag)
 Jump easily between your profiles.
 
 ## Chrome Browser Extension

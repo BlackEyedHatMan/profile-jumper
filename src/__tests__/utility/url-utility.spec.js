@@ -20,10 +20,10 @@ describe('URL Utility', () => {
     })
 
     test('should obtain name from url when trailing parts like parameters', () => {
-        expect(scrubUrlParts('https://x.com/mr_upgradable')).toEqual('x')
-        expect(scrubUrlParts('https://twitter.com/mr_upgradable')).toEqual('twitter')
-        expect(scrubUrlParts('https://www.instagram.com/mrupgradable')).toEqual('instagram')
-        expect(scrubUrlParts('https://www.instagram.com/mrupgradable/?hl=en')).toEqual('instagram')
+        expect(scrubUrlParts('https://x.com/black_eyed_hat_man')).toEqual('x')
+        expect(scrubUrlParts('https://twitter.com/black_eyed_hat_man')).toEqual('twitter')
+        expect(scrubUrlParts('https://www.instagram.com/blackeyedhatman')).toEqual('instagram')
+        expect(scrubUrlParts('https://www.instagram.com/blackeyedhatman/?hl=en')).toEqual('instagram')
     })
 
     test('should obtain name from url with unconventional domain tld', () => {

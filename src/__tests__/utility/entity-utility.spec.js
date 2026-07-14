@@ -3,7 +3,7 @@ import { isEntityEmpty } from '../../utility/entity/entity-utility'
 describe('Entity Utility', () => {
 
     test('entity is not empty', () => {
-        const entity = { name: 'Mr Upgradable' }
+        const entity = { name: 'BlackEyedHatMan' }
         expect(isEntityEmpty(entity)).toBeFalsy()
     })
 
