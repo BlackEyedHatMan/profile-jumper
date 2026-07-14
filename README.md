@@ -35,7 +35,7 @@ Hashtag **#ProfileJumper** with Thanks! (or any other choice words) and this wou
 
 Support this project by keeping it free
 
-<a href="https://coff.ee/profilejumper">
+<a href="https://coff.ee/blackeyedhatman">
 <img src="artwork/support/by-me-a-coffee.png" alt="Buy me a coffee" width="200">
 </a>
 
